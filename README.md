@@ -1,1 +1,0 @@
-# plantilla_frontend
