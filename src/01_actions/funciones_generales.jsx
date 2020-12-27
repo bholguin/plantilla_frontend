@@ -33,40 +33,19 @@ export function createRequest(request, options = {}) {
                 console.log('entro al dispatch')
                 dispatches(response)
             }
-            //if (dispatch_method) {
-            //    if (response.data && response.data.result) {
-            //        dispatch_method(actions.notificarAction(response.data.result, {title: mensaje_cargando}));
-            //    }
-            //    dispatch_method(actions.noCargando())
-            //}
-            //if (callback) {
-            //    callback(response.data)
-            //}
         }).catch(error => {
                 if (callback_error) {
                     callback_error(error)
                 }
                 if (error.response) {
                     if (error.response.status === 400) {
-                        dispatch_method(actions.noCargando());
-                        if (error.response && error.response.data) {
-                            if (error.response.data['non_field_errors']) {
-                                error.response.data['_error'] = error.response.data['non_field_errors'];
-                                dispatch_method(actions.notificarErrorAction(error.response.data['non_field_errors']));
-                            }
-                            if (error.response.data['_error']) {
-                                dispatch_method(actions.notificarErrorAction(error.response.data['_error']));
-                            }
-                            throw new SubmissionError(error.response.data)
-                        }
+                        
                     } else if (error.response.status === 401) {
-
+                        dispatch_method({type: "AUTHENTICATION_ERROR"})
                     } else if (error.response.status === 403) {
-                        dispatch_method(actions.mostrar_error_loading(error.response.data['detail'], `${error.response.status}: ${error.response.statusText}`));
-                        dispatch_method(actions.notificarErrorAction(error.response.data['detail']));
+
                     } else if (402 < error.response.status < 600) {
-                        dispatch_method(actions.mostrar_error_loading(error.response.data, `${error.response.status}: ${error.response.statusText}`));
-                        dispatch_method(actions.notificarErrorAction(error.response.status));
+
                     } else {
                         if (error.response.data) {
                             console.log(error.response)
@@ -74,10 +53,10 @@ export function createRequest(request, options = {}) {
                     }
                 } else if (!error.response) {
                     if (error.message === 'Network Error') {
-                        dispatch_method(actions.mostrar_error_loading(error.stack, 'Error de red'))
+
                     } else {
                         console.log(error)
-                        //dispatch_method(actions.mostrar_error_loading(error.stack, error.message))
+
                     }
                 }
             }
@@ -87,10 +66,10 @@ export function createRequest(request, options = {}) {
 export function fetchListGet(url, options) {
     console.log(`%cFETCH LIST - %c${url.toUpperCase()}`, 'color:red', 'color:blue');
     const mensaje_cargando = `Consultando ${url.toUpperCase()}`;
-    const FULL_URL = `${url}/?format=json`;
+    const FULL_URL = url;
     const headers = {"Content-Type": "application/json"};
     if (localStorage.token) {
-        headers["x-access-tokens"] = localStorage.token;
+        headers["Authorization"] = `Bearer ${localStorage.token}`; 
     }
     axios_instance.defaults.headers = headers;
     const request = axios_instance.get(FULL_URL);

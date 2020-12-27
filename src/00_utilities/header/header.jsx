@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+
+import * as actions from '../../01_actions';
 //iconos
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -56,7 +58,7 @@ const Header = (props) => {
                         {place}
                     </div>
                     <div className={classes.widthHeaderLogout}>
-                        <Button className={classes.logout}>salir</Button>
+                        <Button className={classes.logout} onClick={() => props.logout()}>salir</Button>
                     </div>
                 </Toolbar>
             </AppBar>
@@ -98,6 +100,9 @@ Header.propTypes = {
     body: PropTypes.object.isRequired
 };
 
+
 export default compose(
-    withStyles(header_app, { withTheme: true }))
+    withStyles(header_app, { withTheme: true }),
+    connect(state => (console.log("estate header", state), { place: '' }),
+        actions))
     (Header);

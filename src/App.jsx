@@ -24,7 +24,7 @@ function configureStore(){
 class RootContainerComponent extends Component {
 
     componentDidMount() {
-        this.props.loadUser();
+        this.props.loadUserToken();
     }
 
     PrivateRoute = ({component: ChildComponent, ...rest}) => {
@@ -48,7 +48,6 @@ class RootContainerComponent extends Component {
                         <PrivateRoute exact path='/' component={IndexApp}/>
                         <PrivateRoute exact path='/app' component={IndexApp}/>
                         <PrivateRoute exact path='/app/home' component={Home}/>
-
                         <PrivateRoute exact path='/app/config' component={Config}/>
                         <PrivateRoute exact path='/app/config/usuario' component={Usuario}/>
                         <Route path='/app/login' component={Login}/>

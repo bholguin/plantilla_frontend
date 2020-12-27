@@ -1,40 +1,18 @@
 import {CONSTAN} from '../../00_utilities/constantes/index';
 
-export const loadUser = () => {
+export const loadUserToken = () =>{
     return (dispatch, getState) => {
         dispatch({type: "USER_LOADING"});
-
         const token = getState().auth.token;
-
-        let headers = {
-            "Content-Type": "application/json",
-        };
-
-        if (token) {
-            headers["x-access-tokens"] = token;
+        if(token){
+            dispatch({type: 'USER_LOADED'});
+        }else{
+            dispatch({type: "AUTHENTICATION_ERROR"});
         }
-        return fetch(CONSTAN.API+"login/", {headers,})
-            .then(res => {
-                console.log(res, 'rspuesta get')
-                if (res.status < 501) {
-                    return res.json().then(data => {
-                        return {status: res.status, data};
-                    })
-                }
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    dispatch({type: 'USER_LOADED', user: res.data});
-                    return res.data;
-                } else if (res.status >= 400 && res.status < 500) {
-                    dispatch({type: "AUTHENTICATION_ERROR", data: res.data});
-                    throw res.data;
-                }else{
-                    dispatch({type: "LOGIN_FAILED", data: res.data});
-                }
-            })
+        
     }
-};
+}
+
 
 export const clear_authentication_errors = () => {
     return (dispatch) => {
@@ -71,7 +49,7 @@ export const logout = () => {
         const token = getState().auth.token;
         let headers = {"Content-Type": "application/json"};
         if (token) {
-            headers["x-access-tokens"] = token;
+            headers["Authorization"] = `Bearer ${token}`; 
         }
         return fetch(CONSTAN.API+"logout/", {headers})
             .then(res => {
