@@ -1,4 +1,4 @@
-import React, { Fragment, useState, memo } from "react";
+import React, { Fragment, useState, useEffect, memo } from "react";
 import { useForm, FormProvider } from 'react-hook-form';
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -25,20 +25,16 @@ const useStyles = makeStyles({
     buttonStyle: { width: '100%', backgroundColor: '#F0EEEE' }
 });
 
-
 const Login = memo((props) => {
     const methods = useForm()
     const { handleSubmit } = methods;
     const [errorLogin, setErrorLogin] = useState(null);
     const { auth } = props;
     const classes = useStyles();
+    useEffect(() => { setErrorLogin(auth.errors) }, [auth.errors]);
 
     if (auth.isAuthenticated) {
         return <Redirect to="/app" />
-    }
-
-    if (auth && auth.errors) {
-        setErrorLogin(auth.errors)
     }
 
     const onSubmit = (data) => { props.login(data.username, data.password) }
@@ -68,7 +64,7 @@ const Login = memo((props) => {
                     <CardActions>
                         <Button
                             variant="contained"
-                            className={classNames(classes.buttonStyle, 'col-12') }
+                            className={classNames(classes.buttonStyle, 'col-12')}
                             //disabled={submitting || pristine}
                             type='submit'
                         >
