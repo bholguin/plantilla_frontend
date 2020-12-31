@@ -1,7 +1,8 @@
-import React, { Fragment, useState } from "react";
-import { useForm } from 'react-hook-form';
+import React, { Fragment, useState, memo } from "react";
+import { useForm, FormProvider } from 'react-hook-form';
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import classNames from 'classnames'
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -11,11 +12,9 @@ import Button from '@material-ui/core/Button';
 import ImgQueso from '../../../00_utilities/img/queso.jpg';
 import * as actions from '../../../01_actions/index';
 import { makeStyles } from '@material-ui/core/styles';
+import { FromInput } from '../../../00_utilities/fields';
 
 const useStyles = makeStyles({
-    root: {
-        color: 'white',
-    },
     cardStyle: {
         width: '30%',
         margin: '0 auto',
@@ -27,8 +26,9 @@ const useStyles = makeStyles({
 });
 
 
-const Login = (props) => {
-    const { register, handleSubmit } = useForm();
+const Login = memo((props) => {
+    const methods = useForm()
+    const { handleSubmit } = methods;
     const [errorLogin, setErrorLogin] = useState(null);
     const { auth } = props;
     const classes = useStyles();
@@ -53,14 +53,22 @@ const Login = (props) => {
                 />
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <CardContent>
-                        <input name="username" ref={register} placeholder="Username" />
-                        <input name="password" ref={register} placeholder="Password" />
+                        <FormProvider {...methods}>
+                            <FromInput
+                                name="username"
+                                label="Username"
+                            />
+                            <FromInput
+                                name="password"
+                                label="Password"
+                                type="password"
+                            />
+                        </FormProvider>
                     </CardContent>
                     <CardActions>
                         <Button
                             variant="contained"
-                            className='col-12'
-                            className={classes.buttonStyle}
+                            className={classNames(classes.buttonStyle, 'col-12') }
                             //disabled={submitting || pristine}
                             type='submit'
                         >
@@ -79,7 +87,7 @@ const Login = (props) => {
             </Card>
         </Fragment>
     )
-}
+});
 
 const mapPropsToState = (state) => { return { auth: state.auth } }
 export default connect(mapPropsToState, actions)(Login);

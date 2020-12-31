@@ -1,5 +1,5 @@
-import {omit, mapKeys} from 'lodash';
-import { actions } from 'react-table';
+import {omit} from 'lodash';
+
 
 const mostrarLogs = (tipo) => {
     const mostrar = true;
@@ -9,7 +9,7 @@ const mostrarLogs = (tipo) => {
     }
 };
 
-export default function (actions_types, state = {}, action, mapKey = 'id') {
+export default function (actions_types, state = {}, action) {
     switch (action.type) {
         case actions_types.create:
             mostrarLogs('create');

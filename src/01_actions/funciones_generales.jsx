@@ -1,8 +1,5 @@
 import axios from "axios/index";
-import React from 'react';
-import * as actions from "./index";
 import {CONSTAN} from '../00_utilities/constantes/index';
-import {SubmissionError} from 'redux-form';
 
 const axios_instance = axios.create({
     baseURL: CONSTAN.API

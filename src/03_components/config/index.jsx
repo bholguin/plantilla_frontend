@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom'
 import Typography from '@material-ui/core/Typography';
 import SupervisorAccount from '@material-ui/icons/SupervisorAccount';
 import LocalLibrary from '@material-ui/icons/LocalLibrary';
-import SettingsApplications from '@material-ui/icons/SettingsApplications';
 import AirportShuttle from '@material-ui/icons/AirportShuttle';
 import Workspace from '../../workspace';
 

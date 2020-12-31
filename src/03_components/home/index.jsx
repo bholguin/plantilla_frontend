@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography';
 
 import LocalLibrary from '@material-ui/icons/LocalLibrary';
 import SettingsApplications from '@material-ui/icons/SettingsApplications';
-import AirportShuttle from '@material-ui/icons/AirportShuttle';
 import Workspace from '../../workspace';
 
 const mystyile = {

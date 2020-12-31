@@ -103,6 +103,6 @@ Header.propTypes = {
 
 export default compose(
     withStyles(header_app, { withTheme: true }),
-    connect(state => (console.log("estate header", state), { place: '' }),
+    connect(state => ({ place: '' }),
         actions))
     (Header);

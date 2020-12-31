@@ -28,7 +28,6 @@ export const useColumnTable = () => {
             Header: () => null, // No header
             id: 'expander', // It needs an ID
             Cell: ({ row }) => (
-                console.log(row),
                 <span style={{margin: '0 auto'}}>
                     <IconButton>
                         <EditIcon />
@@ -37,7 +36,7 @@ export const useColumnTable = () => {
                         <DeleteForeverIcon />
                     </IconButton>
                 </span>
-            ),
+            )
         }
     ]);
     return columns

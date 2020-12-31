@@ -1,28 +1,46 @@
-import React, {Fragment} from 'react';
-import {Field} from 'redux-form';
+import React, { Fragment } from 'react';
+import { Field } from 'redux-form';
 import PropTypes from "prop-types";
-
 import TextField from '@material-ui/core/TextField';
-
 import { makeStyles } from '@material-ui/core/styles';
 
- const useStyles = makeStyles({
-      root:{
-            color: '#F0EEEE'
-      },
-      input: {
+
+import { useFormContext, Controller } from 'react-hook-form';
+
+export const FromInput = (props) => {
+    const { control } = useFormContext();
+    const { name, label } = props;
+    return (
+        <Controller
+            as={TextField}
+            name={name}
+            control={control}
+            defaultValue=""
+            label={label}
+            fullWidth={true}
+            {...props}
+        />
+    );
+}
+
+
+const useStyles = makeStyles({
+    root: {
+        color: '#F0EEEE'
+    },
+    input: {
         color: 'white'
-        },
-        textField:{
-            color: 'white'
-        }
- });
+    },
+    textField: {
+        color: 'white'
+    }
+});
 
 
-const renderTextField = ({input, label, meta: {touched, error, warning}, ...custom}) => {
+const renderTextField = ({ input, label, meta: { touched, error, warning }, ...custom }) => {
     let new_custom = custom;
     if (touched && error) {
-        new_custom = {...custom, helperText: error}
+        new_custom = { ...custom, helperText: error }
     }
     return (
         <Fragment>

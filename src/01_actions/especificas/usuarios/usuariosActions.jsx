@@ -4,7 +4,7 @@ import{
 }from '../../funciones_generales';
 
 const current_url_api_usuarios = 'usuarios'
-const current_url_api_usuario = 'usuario'
+//const current_url_api_usuario = 'usuario'
 
 
 export const fetchUsuarios = (options_action = {}) => {
