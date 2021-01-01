@@ -13,6 +13,7 @@ import ImgQueso from '../../../00_utilities/img/queso.jpg';
 import * as actions from '../../../01_actions/index';
 import { makeStyles } from '@material-ui/core/styles';
 import { FromInput } from '../../../00_utilities/fields';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles({
     cardStyle: {
@@ -53,11 +54,15 @@ const Login = memo((props) => {
                             <FromInput
                                 name="username"
                                 label="Username"
+                                fullWidth={true}
+                                autoFocus={true}  
+                                
                             />
                             <FromInput
                                 name="password"
                                 label="Password"
                                 type="password"
+                                fullWidth={true}
                             />
                         </FormProvider>
                     </CardContent>
@@ -74,11 +79,7 @@ const Login = memo((props) => {
                 </form>
                 {
                     errorLogin &&
-                    <div className='mt-3'>
-                        <Typography variant="caption" gutterBottom color="error">
-                            {errorLogin}
-                        </Typography>
-                    </div>
+                    <Alert severity="error">{errorLogin}</Alert>
                 }
             </Card>
         </Fragment>

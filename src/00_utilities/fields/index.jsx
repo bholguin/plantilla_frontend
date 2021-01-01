@@ -1,25 +1,54 @@
 import React, { Fragment } from 'react';
 import { Field } from 'redux-form';
 import PropTypes from "prop-types";
-import TextField from '@material-ui/core/TextField';
+import { TextField, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
-
 import { useFormContext, Controller } from 'react-hook-form';
+
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#ffff',
+        },
+        secondary: {
+            main: '#ffff',
+        },
+    },
+    overrides: {
+        MuiInput: {
+            root: {
+                borderRadius: 0,
+                color: "#fff",
+            },
+            underline: {
+                "&&&&:before": {
+                    borderBottom: "1px solid rgba(255, 255, 255)"
+                }
+            }
+        },
+        MuiFormLabel: {
+            root: {
+                color: "#fff"
+            }
+        }
+    }
+});
 
 export const FromInput = (props) => {
     const { control } = useFormContext();
     const { name, label } = props;
     return (
-        <Controller
-            as={TextField}
-            name={name}
-            control={control}
-            defaultValue=""
-            label={label}
-            fullWidth={true}
-            {...props}
-        />
+        <ThemeProvider theme={theme}>
+            <Controller
+                as={TextField}
+                name={name}
+                control={control}
+                defaultValue=""
+                label={label}
+                {...props}
+            />
+        </ThemeProvider>
     );
 }
 
