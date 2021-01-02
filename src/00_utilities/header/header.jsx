@@ -97,7 +97,7 @@ const Header = (props) => {
 Header.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
-    body: PropTypes.object.isRequired
+    body: PropTypes.array.isRequired
 };
 
 

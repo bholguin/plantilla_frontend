@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import { createStore, applyMiddleware } from 'redux';
@@ -14,62 +14,63 @@ import Usuario from './03_components/config/usuarios';
 import Home from './03_components/home';
 import Config from './03_components/config';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise, thunk)(createStore);
 
-function configureStore() {
-    const store = createStoreWithMiddleware(reducer)
-    return store;
+
+const configureStore = () => {
+    const createStoreWithMiddleware = applyMiddleware(ReduxPromise, thunk)(createStore);
+    return createStoreWithMiddleware(reducer)
 }
 
-class RootContainerComponent extends Component {
+const store = configureStore();
 
-    componentDidMount() {
-        this.props.loadUserToken();
-    }
+const AppRoutes = (PrivateRoute) => {
+    return (
+        <BrowserRouter>
+            <Switch>
+                <PrivateRoute exact path='/' component={IndexApp} />
+                <PrivateRoute exact path='/app' component={IndexApp} />
+                <PrivateRoute exact path='/app/home' component={Home} />
+                <PrivateRoute exact path='/app/config' component={Config} />
+                <PrivateRoute exact path='/app/config/usuario' component={Usuario} />
+                <Route path='/app/login' component={Login} />
+            </Switch>
+        </BrowserRouter>
+    )
+}
 
-    PrivateRoute = ({ component: ChildComponent, ...rest }) => {
-        return <Route {...rest} render={props => {
-            if (this.props.auth.isLoading) {
+
+
+const RootContainerComponent = (props) => {
+    const { loadUserToken, auth } = props
+    useEffect(() => { loadUserToken(); }, [loadUserToken]);
+    const PrivateRoute = ({ component: ChildComponent, ...rest }) => {
+        return <Route {...rest} render={propsr => {
+            if (auth.isLoading) {
                 return <em>Loading...</em>;
-            } else if (!this.props.auth.isAuthenticated) {
+            } else if (!auth.isAuthenticated) {
                 return <Redirect to="/app/login" />;
             } else {
-                return <ChildComponent {...props} />
+                return <ChildComponent {...propsr} />
             }
         }} />
     };
-
-    render() {
-        let { PrivateRoute } = this;
-        return (
-            <BrowserRouter>
-                <Fragment>
-                    <Switch>
-                        <PrivateRoute exact path='/' component={IndexApp} />
-                        <PrivateRoute exact path='/app' component={IndexApp} />
-                        <PrivateRoute exact path='/app/home' component={Home} />
-                        <PrivateRoute exact path='/app/config' component={Config} />
-                        <PrivateRoute exact path='/app/config/usuario' component={Usuario} />
-                        <Route path='/app/login' component={Login} />
-                    </Switch>
-                </Fragment>
-            </BrowserRouter>
-        )
-    }
+    return (
+        AppRoutes(PrivateRoute)
+    )
 }
 
 const mapPropsToState = (state) => { return { auth: state.auth } }
 
-const store = configureStore();
+const RootContainer = (connect(mapPropsToState, actions)(RootContainerComponent));
 
-let RootContainer = (connect(mapPropsToState, actions)(RootContainerComponent));
-
-export default class App extends Component {
-    render() {
-        return (
-            <Provider store={store}>
-                <RootContainer />
-            </Provider>
-        );
-    }
+const App = () => {
+    return (
+        <Provider store={store}>
+            <RootContainer />
+        </Provider>
+    )
 }
+
+
+export default App
+

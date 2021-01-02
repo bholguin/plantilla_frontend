@@ -2,7 +2,7 @@ const initialState = {
     token: localStorage.getItem("token"),
     mi_cuenta: JSON.parse(localStorage.getItem("mi_cuenta")),
     mis_permisos: JSON.parse(localStorage.getItem("mis_permisos")),
-    isAuthenticated: null,
+    isAuthenticated: false,
     isLoading: true,
     user: null,
     errors: null,

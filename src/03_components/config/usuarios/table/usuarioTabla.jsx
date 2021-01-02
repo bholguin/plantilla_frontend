@@ -5,7 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 export const useColumnTable = () => {
 
-    const columns = useMemo(() => [
+    const columns =  [
         {
             Header: 'USUARIOS',
             columns: [
@@ -38,7 +38,8 @@ export const useColumnTable = () => {
                 </span>
             )
         }
-    ]);
-    return columns
+    ];
+
+    return useMemo(()=> columns, [columns]) 
 }
 

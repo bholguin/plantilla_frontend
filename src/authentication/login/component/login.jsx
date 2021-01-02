@@ -3,7 +3,6 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import classNames from 'classnames'
-import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';

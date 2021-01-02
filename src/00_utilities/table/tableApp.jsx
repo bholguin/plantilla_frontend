@@ -41,7 +41,6 @@ function GlobalFilterM({
 
 
 function TableApp({ columns, data }) {
-    console.log(columns, data, 'hook')
     const { getTableProps,
         headerGroups,
         rows,

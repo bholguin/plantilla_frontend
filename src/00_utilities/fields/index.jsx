@@ -29,7 +29,8 @@ const theme = createMuiTheme({
         },
         MuiFormLabel: {
             root: {
-                color: "#fff"
+                color: "#fff",
+                fontSize: '16px'
             }
         }
     }
