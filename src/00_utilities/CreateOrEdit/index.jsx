@@ -1,52 +1,55 @@
 //modal
-import React from 'react';
+import React, { Fragment, forwardRef, createRef, useState, useEffect } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import { connect } from 'react-redux';
 import * as actions from '../../01_actions/index';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
+import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 //import RemoteSubmitButton from "./remoteSubmitButton";
 //import globalStyles from '../../css/global';
 
-function Transition(props) {
-    return <Slide direction="left" {...props} />;
+const Transition = forwardRef((props, ref) => {
+    const refe = createRef();
+    console.log(ref);
+    console.log(refe)
+    return <Slide direction="left" ref={refe} {...props} />;
+})
+
+const CreateOrEdit = (props) => {
+    console.log(props)
+    return (
+        <Fragment>
+            <Dialog
+                fullScreen
+                fullWidth={true}
+                open={props.coe_model}
+                onClose={() => { props.CloseCOEModal() }}
+                TransitionComponent={Transition}>
+                <AppBar >
+                    <Toolbar>
+                        <IconButton color="inherit" onClick={() => props.CloseCOEModal()} aria-label="Close">
+                            <CloseIcon />
+                        </IconButton>
+                    </Toolbar>
+                </AppBar>
+                <Fragment>
+                {props.children}
+                </Fragment>
+               
+            </Dialog>
+        </Fragment>
+    )
 }
 
-class CreateOrEdit extends React.Component {
-    render() {
-        const { coe_model } = this.props;
-        return (
-            <div>
-                <Dialog
-                    fullScreen
-                    fullWidth={true}
-                    open={coe_model.open}
-                    onClose={() => {this.props.CloseCOEModal()}}
-                    TransitionComponent={Transition}>
-                    <AppBar >
-                        <Toolbar>
-                            <IconButton color="inherit" onClick={() => {this.props.CloseCOEModal()}} aria-label="Close">
-                                <CloseIcon />
-                            </IconButton>
-                            <Typography variant="title" color="inherit" >
-
-                            </Typography>
-                            <RemoteSubmitButton formName={coe_model.formName} />
-                        </Toolbar>
-                    </AppBar>
-                    <div>
-                        {coe_model.content}
-                    </div>
-                </Dialog>
-            </div>
-        );
-    }
+CreateOrEdit.propTypes = {
+    //formulario: PropTypes.any.isRequired
 }
 
 export default connect(state => ({
-    coe_model: open
+    coe_model: state.createoredit.open
 }), actions)(CreateOrEdit);

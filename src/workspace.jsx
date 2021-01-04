@@ -8,7 +8,7 @@ const Workspace = (props) => {
 }
 
 Workspace.propTypes = {
-    children: PropTypes.array.isRequired
+    children: PropTypes.any.isRequired
 }
 
 export default Workspace;
