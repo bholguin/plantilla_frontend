@@ -6,7 +6,7 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
 import { useTable, useGlobalFilter, useAsyncDebounce } from 'react-table'
@@ -29,7 +29,7 @@ function GlobalFilterM({
                 id="search_table"
                 label={`Search ${count} records...`}
                 value={value || ""}
-                style={{width: '100%', marginBottom:'15px'}}
+                style={{ width: '100%', marginBottom: '15px' }}
                 onChange={e => {
                     setValue(e.target.value);
                     onChange(e.target.value);
@@ -39,8 +39,49 @@ function GlobalFilterM({
     )
 }
 
+const StyledTableCell = withStyles((theme) => ({
+    head: {
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.common.white,
+        fontSize: 14,
+        padding: 5,
+        fontWeight: 'bold'
+    },
+    body: {
+        padding: 5,
+        fontSize: 13
+    },
+}))(TableCell);
 
-function TableApp({ columns, data }) {
+const StyledTableCellOptions = withStyles((theme) => ({
+    head: {
+        width: '15%',
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.common.white,
+        fontSize: 14,
+        padding: 5,
+        fontWeight: 'bold'
+    },
+    body: {
+        padding: 5,
+        fontSize: 13
+    },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => (
+    {
+        root: {
+            padding: 0,
+            '&:nth-of-type(odd)': {
+                backgroundColor: theme.palette.action.hover,
+
+            },
+        },
+    }
+
+))(TableRow);
+
+const TableApp = ({ columns, data }) => {
     const { getTableProps,
         headerGroups,
         rows,
@@ -54,37 +95,41 @@ function TableApp({ columns, data }) {
 
     return (
         <div>
+            <GlobalFilterM
+                preGlobalFilteredRows={preGlobalFilteredRows}
+                globalFilter={state.globalFilter}
+                setGlobalFilter={setGlobalFilter}
+            />
             <TableContainer component={Paper}>
-                <GlobalFilterM
-                    preGlobalFilteredRows={preGlobalFilteredRows}
-                    globalFilter={state.globalFilter}
-                    setGlobalFilter={setGlobalFilter}
-                />
-                <MaUTable {...getTableProps()}>
+                <MaUTable padding='none' {...getTableProps()}>
                     <TableHead>
                         {headerGroups.map(headerGroup => (
-                            <TableRow {...headerGroup.getHeaderGroupProps()}>
+                            <StyledTableRow {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map(column => (
-                                    <TableCell {...column.getHeaderProps()}>
-                                        {column.render('Header')}
-                                    </TableCell>
+                                    column.id === 'opciones' ?
+                                        <StyledTableCellOptions {...column.getHeaderProps()}>
+                                            {column.Header}
+                                        </StyledTableCellOptions> :
+                                        <StyledTableCell {...column.getHeaderProps()}>
+                                            {column.Header}
+                                        </StyledTableCell>
                                 ))}
-                            </TableRow>
+                            </StyledTableRow>
                         ))}
                     </TableHead>
                     <TableBody>
                         {rows.map((row, i) => {
                             prepareRow(row)
                             return (
-                                <TableRow {...row.getRowProps()}>
+                                <StyledTableRow {...row.getRowProps()}>
                                     {row.cells.map(cell => {
                                         return (
-                                            <TableCell {...cell.getCellProps()}>
+                                            <StyledTableCell {...cell.getCellProps()}>
                                                 {cell.render('Cell')}
-                                            </TableCell>
+                                            </StyledTableCell>
                                         )
                                     })}
-                                </TableRow>
+                                </StyledTableRow>
                             )
                         })}
                     </TableBody>
