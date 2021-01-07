@@ -6,7 +6,7 @@ const useStyles = makeStyles({
         '& a': {
             textDecoration: 'none',
             color: '#4d4343',
-            '& svg':{
+            '& svg': {
                 width: '3em',
                 height: '3em'
             }
@@ -18,7 +18,7 @@ const IconPanel = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.icon}>
-            { props.children}
+            {props.children}
         </div>
     )
 }

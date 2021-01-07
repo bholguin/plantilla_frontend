@@ -19,36 +19,32 @@ const Config = () => {
     const classes = useStyles();
     return (
         <Workspace>
-            <div>
-                <div>
-                    <Grid container spacing={3}>
-                        <Grid item xs={4} className={classes.opciones}>
-                            <IconPanel>
-                                <Link to='/app/config/usuario'>
-                                    <SupervisorAccount />
-                                    <Typography >Usuarios</Typography>
-                                </Link>
-                            </IconPanel>
-                        </Grid>
-                        <Grid item xs={4} className={classes.opciones}>
-                            <IconPanel>
-                                <Link to='/app/config/'>
-                                    <LocalLibrary />
-                                    <Typography>Articulos</Typography>
-                                </Link>
-                            </IconPanel>
-                        </Grid>
-                        <Grid item xs={4} className={classes.opciones}>
-                            <IconPanel>
-                                <Link to='/app/config/'>
-                                    <AirportShuttle />
-                                    <Typography >Carros</Typography>
-                                </Link>
-                            </IconPanel>
-                        </Grid>
-                    </Grid>
-                </div>
-            </div>
+            <Grid container spacing={3}>
+                <Grid item xs={4} className={classes.opciones}>
+                    <IconPanel>
+                        <Link to='/app/config/usuario'>
+                            <SupervisorAccount />
+                            <Typography >Usuarios</Typography>
+                        </Link>
+                    </IconPanel>
+                </Grid>
+                <Grid item xs={4} className={classes.opciones}>
+                    <IconPanel>
+                        <Link to='/app/config/'>
+                            <LocalLibrary />
+                            <Typography>Articulos</Typography>
+                        </Link>
+                    </IconPanel>
+                </Grid>
+                <Grid item xs={4} className={classes.opciones}>
+                    <IconPanel>
+                        <Link to='/app/config/'>
+                            <AirportShuttle />
+                            <Typography >Carros</Typography>
+                        </Link>
+                    </IconPanel>
+                </Grid>
+            </Grid>
         </Workspace>
     );
 }
