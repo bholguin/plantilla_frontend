@@ -6,6 +6,8 @@ import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/sty
 import LocalLibrary from '@material-ui/icons/LocalLibrary';
 import SettingsApplications from '@material-ui/icons/SettingsApplications';
 import Workspace from '../../workspace';
+import IconPanel from '../../00_utilities/icon_wrapper'
+
 
 const theme = createMuiTheme({
     overrides: {
@@ -22,28 +24,7 @@ const theme = createMuiTheme({
 const useStyles = makeStyles({
     opciones: {
         textAlign: 'center',
-        marginLeft: '20px',
-        verticalAlign: 'super',
-        textDecoration: 'none !important',
-        color: '#4d4343  !important',
-        icono: {
-            fontSize: '200px'
-        },
-        texto: {
-            fontSize: '100px'
-        },
-        linkIcons: {
-            marginLeft: '20px',
-            verticalAlign: 'super',
-            textDecoration: 'none !important',
-            color: '#4d4343  !important'
-        },
-        ppp: {
-            width: '3em',
-            height: '3em'
-        }
-    },
-
+    }
 });
 
 const Home = () => {
@@ -53,16 +34,20 @@ const Home = () => {
             <Fragment>
                 <Grid container spacing={3}>
                     <Grid item xs={4} className={classes.opciones}>
-                        <Link to='/app/config' className={classes.opciones.linkIcons}>
-                            <SettingsApplications classes={{
-                                root: classes.opciones.ppp
-                            }} />
-                            <Typography className={classes.opciones.texto}>Configuracion</Typography>
-                        </Link>
+                        <IconPanel>
+                            <Link to='/app/config'>
+                                <SettingsApplications />
+                                <Typography>Configuracion</Typography>
+                            </Link>
+                        </IconPanel>
                     </Grid>
                     <Grid item xs={4} className={classes.opciones}>
-                        <LocalLibrary className={classes.opciones.icono} />
-                        <Typography className={classes.opciones.texto}>Inventario</Typography>
+                        <IconPanel>
+                            <Link to='/'>
+                                <LocalLibrary />
+                                <Typography>Inventario</Typography>
+                            </Link>
+                        </IconPanel>
                     </Grid>
                 </Grid>
             </Fragment>

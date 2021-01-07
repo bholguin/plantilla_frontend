@@ -1,50 +1,56 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography';
 import SupervisorAccount from '@material-ui/icons/SupervisorAccount';
 import LocalLibrary from '@material-ui/icons/LocalLibrary';
 import AirportShuttle from '@material-ui/icons/AirportShuttle';
 import Workspace from '../../workspace';
+import IconPanel from '../../00_utilities/icon_wrapper';
+import { makeStyles } from '@material-ui/core/styles';
 
-class Config extends Component{
-    render(){
-        const mystyile = {
-            opciones: {
-                textAlign: 'center',
-                icono: {
-                    fontSize: '100px'
-                },
-                texto: {
-                    fontSize: '20px'
-                }
-            }
-        };
-        return (
-            <Workspace>
-                <div>
-                    <div>
-                        <Grid container spacing={3}>
-                            <Grid item  xs={4} style={mystyile.opciones}>
-                                <Link to='/app/config/usuario'>
-                                    <SupervisorAccount style={mystyile.opciones.icono}/>
-                                    <Typography style={mystyile.opciones.texto}>Usuarios</Typography>
-                                </Link>
-                            </Grid>
-                            <Grid item xs={4} style={mystyile.opciones}>
-                                <LocalLibrary style={mystyile.opciones.icono}/>
-                                <Typography style={mystyile.opciones.texto}>Articulos</Typography>
-                            </Grid>
-                            <Grid item xs={4} style={mystyile.opciones}>
-                                <AirportShuttle style={mystyile.opciones.icono}/>
-                                <Typography style={mystyile.opciones.texto}>Carros</Typography>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </div>
-            </Workspace>
-        );
+const useStyles = makeStyles({
+    opciones: {
+        textAlign: 'center',
     }
+});
+
+const Config = () => {
+    const classes = useStyles();
+    return (
+        <Workspace>
+            <div>
+                <div>
+                    <Grid container spacing={3}>
+                        <Grid item xs={4} className={classes.opciones}>
+                            <IconPanel>
+                                <Link to='/app/config/usuario'>
+                                    <SupervisorAccount />
+                                    <Typography >Usuarios</Typography>
+                                </Link>
+                            </IconPanel>
+                        </Grid>
+                        <Grid item xs={4} className={classes.opciones}>
+                            <IconPanel>
+                                <Link to='/app/config/'>
+                                    <LocalLibrary />
+                                    <Typography>Articulos</Typography>
+                                </Link>
+                            </IconPanel>
+                        </Grid>
+                        <Grid item xs={4} className={classes.opciones}>
+                            <IconPanel>
+                                <Link to='/app/config/'>
+                                    <AirportShuttle />
+                                    <Typography >Carros</Typography>
+                                </Link>
+                            </IconPanel>
+                        </Grid>
+                    </Grid>
+                </div>
+            </div>
+        </Workspace>
+    );
 }
 
 export default Config;
