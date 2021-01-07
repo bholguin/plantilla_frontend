@@ -5,55 +5,6 @@ import { TextField, createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useFormContext, Controller } from 'react-hook-form';
 
-
-const theme = createMuiTheme({
-    palette: {
-        primary: {
-            main: '#ffff',
-        },
-        secondary: {
-            main: '#ffff',
-        },
-    },
-    overrides: {
-        MuiInput: {
-            root: {
-                borderRadius: 0,
-                color: "#fff",
-            },
-            underline: {
-                "&&&&:before": {
-                    borderBottom: "1px solid rgba(255, 255, 255)"
-                }
-            }
-        },
-        MuiFormLabel: {
-            root: {
-                color: "#fff",
-                fontSize: '16px'
-            }
-        }
-    }
-});
-
-export const FromInput = (props) => {
-    const { control } = useFormContext();
-    const { name, label } = props;
-    return (
-        <ThemeProvider theme={theme}>
-            <Controller
-                as={TextField}
-                name={name}
-                control={control}
-                defaultValue=""
-                label={label}
-                {...props}
-            />
-        </ThemeProvider>
-    );
-}
-
-
 const useStyles = makeStyles({
     root: {
         color: '#F0EEEE'
@@ -63,8 +14,47 @@ const useStyles = makeStyles({
     },
     textField: {
         color: 'white'
+    },
+    input_field:{
+        margin: '15px'
     }
 });
+
+
+
+export const FromInput = (props) => {
+    const { control } = useFormContext();
+    const { name, label } = props;
+    const classes = useStyles();
+    return (
+        <Controller
+            as={TextField}
+            name={name}
+            className ={classes.input_field}
+            control={control}
+            defaultValue=""
+            label={label}
+            {...props}
+        />
+    );
+}
+
+export const FormInputLogin = (props) => {
+    const { control } = useFormContext();
+    const { name, label } = props;
+    return (
+        <Controller
+            as={TextField}
+            name={name}
+            control={control}
+            defaultValue=""
+            label={label}
+            {...props}
+        />
+    );
+}
+
+
 
 
 const renderTextField = ({ input, label, meta: { touched, error, warning }, ...custom }) => {

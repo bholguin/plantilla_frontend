@@ -1,12 +1,11 @@
 //modal
-import React, { Fragment, forwardRef, createRef, useState, useEffect } from 'react';
+import React, { Fragment, forwardRef } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import { connect } from 'react-redux';
 import * as actions from '../../01_actions/index';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
@@ -14,14 +13,11 @@ import Slide from '@material-ui/core/Slide';
 //import globalStyles from '../../css/global';
 
 const Transition = forwardRef((props, ref) => {
-    const refe = createRef();
-    console.log(ref);
-    console.log(refe)
-    return <Slide direction="left" ref={refe} {...props} />;
+    return <Slide direction="left" ref={ref} {...props} />;
 })
 
 const CreateOrEdit = (props) => {
-    console.log(props)
+    console.log(props);
     return (
         <Fragment>
             <Dialog
@@ -38,16 +34,11 @@ const CreateOrEdit = (props) => {
                     </Toolbar>
                 </AppBar>
                 <Fragment>
-                {props.children}
+                    {props.children}
                 </Fragment>
-               
             </Dialog>
         </Fragment>
     )
-}
-
-CreateOrEdit.propTypes = {
-    //formulario: PropTypes.any.isRequired
 }
 
 export default connect(state => ({

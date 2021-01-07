@@ -54,7 +54,6 @@ const Home = () => {
                 <Grid container spacing={3}>
                     <Grid item xs={4} className={classes.opciones}>
                         <Link to='/app/config' className={classes.opciones.linkIcons}>
-
                             <SettingsApplications classes={{
                                 root: classes.opciones.ppp
                             }} />

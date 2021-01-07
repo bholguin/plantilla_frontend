@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import ImgQueso from '../../../00_utilities/img/queso.jpg';
 import * as actions from '../../../01_actions/index';
 import { makeStyles } from '@material-ui/core/styles';
-import { FromInput } from '../../../00_utilities/fields';
+import { FormInputLogin } from '../../../00_utilities/fields';
 import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles({
@@ -50,14 +50,14 @@ const Login = memo((props) => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <CardContent>
                         <FormProvider {...methods}>
-                            <FromInput
+                            <FormInputLogin
                                 name="username"
                                 label="Username"
                                 fullWidth={true}
                                 autoFocus={true}  
                                 
                             />
-                            <FromInput
+                            <FormInputLogin
                                 name="password"
                                 label="Password"
                                 type="password"
