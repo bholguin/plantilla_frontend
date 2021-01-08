@@ -9,8 +9,12 @@ const useStyles = makeStyles({
             '& svg': {
                 width: '3em',
                 height: '3em'
-            }
+            },
         },
+        '&:hover':{
+            transform: 'scale(1.2)'
+        },
+        transitionDuration: '1s'
     }
 });
 
