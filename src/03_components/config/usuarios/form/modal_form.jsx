@@ -15,23 +15,21 @@ const useStyles = makeStyles({
 
 const ModalForm = (props) => {
     const methods = useForm()
-    //const { handleSubmit } = methods;
-    console.log('formulario',props);
     const classes = useStyles();
     const values = props.form.initialValues;
     return (
         <Fragment>
-            <CreateOrEdit>
+            <CreateOrEdit getValues={methods.getValues}>
                 <form className={classes.modal_body}>
                     <FormProvider {...methods}>
                         <FromInput
-                            name="name"
+                            name="nombre"
                             label="Name"
                             fullWidth={true}
                             defaultValue={values.nombre}
                         />
                         <FromInput
-                            name="lastname"
+                            name="apellido"
                             label="Lastname"
                             fullWidth={true}
                             defaultValue={values.apellido}
@@ -39,6 +37,13 @@ const ModalForm = (props) => {
                         <FromInput
                             name="username"
                             label="Username"
+                            fullWidth={true}
+                            defaultValue={values.username}
+                        />
+                        <FromInput
+                            name="password"
+                            label="Password"
+                            type = 'password'
                             fullWidth={true}
                             defaultValue={values.username}
                         />

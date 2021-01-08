@@ -6,9 +6,18 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { useTable, useGlobalFilter, useAsyncDebounce } from 'react-table'
+
+const useStyles = makeStyles({
+    root:{
+        '& div': {
+            width: '50%'
+        }
+    }
+});
+
 
 
 function GlobalFilterM({
@@ -18,6 +27,7 @@ function GlobalFilterM({
 }) {
     const count = preGlobalFilteredRows.length
     const [value, setValue] = React.useState(globalFilter)
+    const classes = useStyles();
     const onChange = useAsyncDebounce(value => {
         setGlobalFilter(value || undefined)
     }, 200)
@@ -29,6 +39,9 @@ function GlobalFilterM({
                 label={`Search ${count} records...`}
                 value={value || ""}
                 style={{ width: '100%', marginBottom: '15px' }}
+                type="search"
+                variant="outlined"
+                className={classes.root}
                 onChange={e => {
                     setValue(e.target.value);
                     onChange(e.target.value);
@@ -40,7 +53,7 @@ function GlobalFilterM({
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: '#4d4343',
         color: theme.palette.common.white,
         fontSize: 14,
         padding: 5,
@@ -55,7 +68,7 @@ const StyledTableCell = withStyles((theme) => ({
 const StyledTableCellOptions = withStyles((theme) => ({
     head: {
         width: '15%',
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: '#4d4343',
         color: theme.palette.common.white,
         fontSize: 14,
         padding: 5,

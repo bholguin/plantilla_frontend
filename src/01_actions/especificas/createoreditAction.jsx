@@ -8,10 +8,11 @@ export const CloseCOEModal = () => {
 }
 
 
-export const OpenCOEModal = () => {
+export const OpenCOEModal = (buttonProps = {}) => {
     return dispatch => {
         return dispatch({
-            type: 'OPEN_COE_MODAL'
+            type: 'OPEN_COE_MODAL',
+            buttonProps: buttonProps
         })
     }
 }

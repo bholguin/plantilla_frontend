@@ -117,13 +117,14 @@ export function updateObject(url, id, values, options, config = null) {
 
 
 export function createObject(url, values, options) {
+    console.log(values)
     console.log(`%cCREATE OBJETO - %c${url.toUpperCase()}`, 'color:red', 'color:blue');
     const mensaje_cargando = `Creando elemento en ${url.toUpperCase()}`;
     axios_instance.defaults.xsrfHeaderName = "X-CSRFTOKEN";
     axios_instance.defaults.xsrfCookieName = "csrftoken";
     const headers = {"Content-Type": "application/json"};
     if (localStorage.token) {
-        headers["Authorization"] = `Token ${localStorage.token}`;
+        headers["Authorization"] = `Bearer ${localStorage.token}`;
     }
     axios_instance.defaults.headers = headers;
     const FULL_URL = `${url}/`;

@@ -1,10 +1,11 @@
 import {USUARIO_TYPES as TYPES} from '../../types';
 import{
-    fetchListGet
+    fetchListGet,
+    createObject
 }from '../../funciones_generales';
 
 const current_url_api_usuarios = 'usuarios'
-//const current_url_api_usuario = 'usuario'
+const current_url_api_usuario = 'usuario'
 
 
 export const fetchUsuarios = (options_action = {}) => {
@@ -13,5 +14,14 @@ export const fetchUsuarios = (options_action = {}) => {
         const {limpiar_coleccion = true} = options_action;
         const options = {dispatches, ...options_action, dispatch_method: dispatch, clear_action_type: limpiar_coleccion ? TYPES.clear : null};
         return fetchListGet(current_url_api_usuarios, options)
+    }
+}
+
+export const postUsuario = (options_action = {}, values) => {
+    return (dispatch) => {
+        const dispatches = (response) => {dispatch({ type: TYPES.create, payload: response })};
+        const {limpiar_coleccion = true} = options_action;
+        const options = {dispatches, ...options_action, dispatch_method: dispatch, clear_action_type: limpiar_coleccion ? TYPES.clear : null};
+        return createObject(current_url_api_usuario, values, options)
     }
 }
