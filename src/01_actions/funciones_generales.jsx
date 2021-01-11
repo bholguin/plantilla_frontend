@@ -30,6 +30,9 @@ export function createRequest(request, options = {}) {
                 console.log('entro al dispatch')
                 dispatches(response)
             }
+            if(dispatch_method){
+                dispatch_method({type: 'CLOSE_COE_MODAL'})
+            }
         }).catch(error => {
                 if (callback_error) {
                     callback_error(error)
@@ -38,7 +41,7 @@ export function createRequest(request, options = {}) {
                     if (error.response.status === 400) {
                         
                     } else if (error.response.status === 401) {
-                        dispatch_method({type: "AUTHENTICATION_ERROR"})
+                        dispatch_method({type: "AUTHENTICATION_ERROR"});
                     } else if (error.response.status === 403) {
 
                     } else if (402 < error.response.status < 600) {

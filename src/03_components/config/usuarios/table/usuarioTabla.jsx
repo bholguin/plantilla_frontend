@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 export const useColumnTable = () => {
     const Dispatch = useDispatch();
     const open_modal = (data) => Dispatch({ type: 'OPEN_COE_MODAL', initialValues: data });
+    const open_delete = () => Dispatch({type: 'OPEN_DELETE_ITEM'});
     const columns = [
         {
             id: 'user',
@@ -33,7 +34,7 @@ export const useColumnTable = () => {
                             <IconButton onClick={() => open_modal(row.original)}>
                                 <EditIcon />
                             </IconButton>
-                            <IconButton>
+                            <IconButton onClick={() => open_delete()}>
                                 <DeleteForeverIcon />
                             </IconButton>
                         </span>
