@@ -1,5 +1,5 @@
 import React from "react";
-import Home from './03_components/home';
+import Home from './screens/home';
 
 const IndexApp = () => {
     return <Home/>

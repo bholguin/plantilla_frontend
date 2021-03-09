@@ -1,1 +1,10 @@
-export * from './especificas/types';
+export const USUARIO_TYPES = {
+    LOAD: 'LOAD_USER',
+    CREATE: 'CREATE_USER',
+    DELETE: 'DELETE_USER',
+    FEATCH_ALL: 'FEATCH_USERS',
+    FEATCH: 'FEATCH_USER',
+    CLEAR: 'CLEAR_USER',
+    UPDATE: 'UPDATE_USER',
+    ERROR: 'ERROR_USER'
+};

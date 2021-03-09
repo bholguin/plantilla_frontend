@@ -1,27 +1,15 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import ReduxPromise from 'redux-promise';
 import { Provider, connect } from "react-redux";
-
 import * as actions from './01_actions/index';
-import reducer from './02_reducers/index';
 import Login from './authentication/login/component/login';
 import IndexApp from './IndexApp';
-import Usuario from './03_components/config/usuarios';
-import Home from './03_components/home';
-import Config from './03_components/config';
+import Usuario from './screens/config/usuarios';
+import Home from './screens/home';
+import Config from './screens/config';
+//hook
+import { useStoreApp } from "./03_redux";
 
-
-
-const configureStore = () => {
-    const createStoreWithMiddleware = applyMiddleware(ReduxPromise, thunk)(createStore);
-    return createStoreWithMiddleware(reducer)
-}
-
-const store = configureStore();
 
 const AppRoutes = (PrivateRoute) => {
     return (
@@ -39,7 +27,6 @@ const AppRoutes = (PrivateRoute) => {
 }
 
 
-
 const RootContainerComponent = (props) => {
     const { loadUserToken, auth } = props
     useEffect(() => { loadUserToken(); }, [loadUserToken]);
@@ -54,7 +41,7 @@ const RootContainerComponent = (props) => {
             }
         }} />
     };
-    return ( 
+    return (
         AppRoutes(PrivateRoute)
     )
 }
@@ -64,6 +51,7 @@ const mapPropsToState = (state) => { return { auth: state.auth } }
 const RootContainer = (connect(mapPropsToState, actions)(RootContainerComponent));
 
 const App = () => {
+    const { store } = useStoreApp()
     return (
         <Provider store={store}>
             <RootContainer />
