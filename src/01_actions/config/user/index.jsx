@@ -1,4 +1,7 @@
-import { USUARIO_TYPES } from "../../types";
+import { 
+    USUARIO_TYPES,  
+    COE_MODAL_TYPE
+} from "../../types";
 import useServices from "../../../05_services";
 
 export const actGetUsers = () => async (dispatch) => {
@@ -8,7 +11,6 @@ export const actGetUsers = () => async (dispatch) => {
             type: USUARIO_TYPES.LOAD
         })
         const res = await UserService.GetUsers()
-        console.log(res.data, 'action')
         dispatch({
             type: USUARIO_TYPES.FEATCH_ALL,
             payload: res.data
@@ -21,3 +23,6 @@ export const actGetUsers = () => async (dispatch) => {
         })
     }
 }
+
+
+

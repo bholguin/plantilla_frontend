@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Provider, connect } from "react-redux";
 import * as actions from './01_actions/index';
-import Login from './authentication/login/component/login';
+import Login from './screens/login';
 import IndexApp from './IndexApp';
 import Usuario from './screens/config/usuarios';
 import Home from './screens/home';

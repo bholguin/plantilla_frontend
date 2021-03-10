@@ -1,20 +1,23 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import * as actions from '../..01_actions'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
+import { useAlertDelete } from "./hook";
 
-const alertDelete = (props) => {
 
-    const [open, setOpen] = React.useState(false);
-    console.log(props)
+const AlertDelete = () => {
+    const{
+        open,
+        closeModal
+    }= useAlertDelete()
+
+
     return (
         <Dialog
             open={open}
-            onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
@@ -25,10 +28,10 @@ const alertDelete = (props) => {
           </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} color="primary">
+                <Button onClick={closeModal} color="primary">
                     Disagree
           </Button>
-                <Button onClick={handleClose} color="primary" autoFocus>
+                <Button onClick={closeModal} color="primary" autoFocus>
                     Agree
           </Button>
             </DialogActions>
@@ -36,6 +39,5 @@ const alertDelete = (props) => {
     )
 }
 
-const mapStatetoProps = (state) => { return { alertdelete: state.alertdelete} }
 
-export default connect(mapStatetoProps, actions)(alertDelete);
+export default AlertDelete;

@@ -2,12 +2,21 @@ import React, { useMemo } from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import {
+    actOpenCOEModal,
+    actOpenDeleteItem
+} from '../../../../../01_actions/common'
+//hook
 
 export const useColumnTable = () => {
-    const Dispatch = useDispatch();
-    const open_modal = (data) => Dispatch({ type: 'OPEN_COE_MODAL', initialValues: data });
-    const open_delete = () => Dispatch({type: 'OPEN_DELETE_ITEM'});
+
+    const dispatch = useDispatch()
+    const openDeleteItem = () => dispatch(actOpenDeleteItem())
+    const editModal = () => dispatch(actOpenCOEModal({
+        tittle: 'Editar'
+    }))
+
     const columns = [
         {
             id: 'user',
@@ -28,13 +37,13 @@ export const useColumnTable = () => {
                 {
                     Header: '', // No header
                     id: 'opciones', // It needs an ID
-                    classes:{width: '20%'},
+                    classes: { width: '20%' },
                     Cell: ({ row }) => (
                         <span>
-                            <IconButton onClick={() => open_modal(row.original)}>
+                            <IconButton onClick={() => editModal()}>
                                 <EditIcon />
                             </IconButton>
-                            <IconButton onClick={() => open_delete()}>
+                            <IconButton onClick={() => openDeleteItem()}>
                                 <DeleteForeverIcon />
                             </IconButton>
                         </span>

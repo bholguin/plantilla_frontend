@@ -8,10 +8,10 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import ImgQueso from '../../../00_utilities/img/queso.jpg';
-import * as actions from '../../../01_actions/index';
+import ImgQueso from '../../00_utilities/img/queso.jpg';
+import * as actions from '../../01_actions';
 import { makeStyles } from '@material-ui/core/styles';
-import { FormInputLogin } from '../../../00_utilities/fields';
+import { FormInputLogin } from '../../00_utilities/fields';
 import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles({

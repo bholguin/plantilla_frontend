@@ -6,3 +6,7 @@ export const axiosFlaskApi = axios.create({
         'Authorization': localStorage.token ? `Bearer ${localStorage.token}` : ''
     }
 })
+
+export const axiosFlaskApiLogin = axios.create({
+    baseURL: process.env.REACT_APP_FLASK_API
+})

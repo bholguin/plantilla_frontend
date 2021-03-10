@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import PropTypes from 'prop-types';
+import { useCOE } from "./hook";
 
 const Transition = forwardRef((props, ref) => {
     return <Slide direction="left" ref={ref} {...props} />;
@@ -18,27 +19,32 @@ const Transition = forwardRef((props, ref) => {
 const CreateOrEdit = (props) => {
     console.log(props)
     const {
-        coe_model,
-        CloseCOEModal,
+        open,
+        initialValues,
+        buttonProps,
+        closeModal
+    } = useCOE()
+    console.log(buttonProps, 'buton')
+    const {
         getValues
     } = props
+
     const submit = () =>{
-        coe_model.buttonProps.submit({}, getValues());
+        buttonProps.submit({}, getValues());
     }
     return (
         <Fragment>
             <Dialog
                 fullScreen
                 fullWidth={true}
-                open={coe_model.open}
-                onClose={() => { CloseCOEModal() }}
+                open={open}
                 TransitionComponent={Transition}>
                 <AppBar >
                     <Toolbar>
-                        <IconButton color="inherit" onClick={() => CloseCOEModal()} aria-label="Close">
+                        <IconButton color="inherit" onClick={() => closeModal()} aria-label="Close">
                             <CloseIcon />
                         </IconButton>
-                        <RemoteButton tittle={coe_model.buttonProps.tittle} submit={submit} />
+                        <RemoteButton tittle={buttonProps.tittle} submit={submit} />
                     </Toolbar>
                 </AppBar>
                 <Fragment>

@@ -8,3 +8,14 @@ export const USUARIO_TYPES = {
     UPDATE: 'UPDATE_USER',
     ERROR: 'ERROR_USER'
 };
+
+
+export const COE_MODAL_TYPE = {
+    OPEN: 'OPEN_COE_MODAL',
+    CLOSE: 'CLOSE_COE_MODAL'
+}
+
+export const DELETE_MODAL_TYPE = {
+    OPEN: 'OPEN_DELETE_MODAL',
+    CLOSE: 'CLOSE_DELETE_MODAL'
+}
