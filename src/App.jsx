@@ -28,6 +28,7 @@ const AppRoutes = (PrivateRoute) => {
 
 
 const RootContainerComponent = (props) => {
+    console.log(props, 'index')
     const { loadUserToken, auth } = props
     useEffect(() => { loadUserToken(); }, [loadUserToken]);
     const PrivateRoute = ({ component: ChildComponent, ...rest }) => {

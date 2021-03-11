@@ -1,5 +1,5 @@
 //Dependecias
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -24,18 +24,15 @@ import Home from '@material-ui/icons/Home';
 
 import { header_app } from '../css';
 
+import { useHeader } from "./hook";
 
 const Header = (props) => {
 
-    const [open, setOpen] = useState(false);
-
-    const handleDrawerOpen = () => {
-        setOpen(true)
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false)
-    };
+    const {
+        open,
+        handleDrawer,
+        Logout
+    } = useHeader()
 
     const { classes, theme, body, place } = props;
     return (
@@ -48,7 +45,7 @@ const Header = (props) => {
                         <IconButton
                             color="inherit"
                             aria-label="open drawer"
-                            onClick={handleDrawerOpen}
+                            onClick={handleDrawer}
                             className={classNames(classes.menuButton, open && classes.hide)}
                         >
                             <MenuIcon />
@@ -59,7 +56,7 @@ const Header = (props) => {
                         {place}
                     </div>
                     <div className={classes.widthHeaderLogout}>
-                        <Button className={classes.logout} onClick={() => props.logout()}>salir</Button>
+                        <Button className={classes.logout} onClick={() => Logout()}>salir</Button>
                     </div>
                 </Toolbar>
             </AppBar>
@@ -71,7 +68,7 @@ const Header = (props) => {
                 open={open}
             >
                 <div className={classes.toolbar}>
-                    <IconButton onClick={handleDrawerClose}>
+                    <IconButton onClick={handleDrawer}>
                         {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                     </IconButton>
                 </div>

@@ -1,6 +1,5 @@
 import { 
-    USUARIO_TYPES,  
-    COE_MODAL_TYPE
+    USUARIO_TYPES
 } from "../../types";
 import useServices from "../../../05_services";
 

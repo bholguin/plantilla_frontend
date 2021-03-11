@@ -14,6 +14,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { FormInputLogin } from '../../00_utilities/fields';
 import Alert from '@material-ui/lab/Alert';
 
+//hook
+import { useLogin } from "./hook";
+
 const useStyles = makeStyles({
     cardStyle: {
         width: '30%',
@@ -25,7 +28,9 @@ const useStyles = makeStyles({
     buttonStyle: { width: '100%', backgroundColor: '#F0EEEE' }
 });
 
-const Login = memo((props) => {
+const Login = (props) => {
+
+    const {Login} = useLogin()
     const methods = useForm()
     const { handleSubmit } = methods;
     const [errorLogin, setErrorLogin] = useState(null);
@@ -36,9 +41,7 @@ const Login = memo((props) => {
     if (auth.isAuthenticated) {
         return <Redirect to="/app" />
     }
-
-    const onSubmit = (data) => { props.login(data.username, data.password) }
-
+    
     return (
         <Fragment>
             <Card className={classes.cardStyle}>
@@ -47,7 +50,7 @@ const Login = memo((props) => {
                     image={ImgQueso}
                     title="Quesos"
                 />
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(Login)}>
                     <CardContent>
                         <FormProvider {...methods}>
                             <FormInputLogin
@@ -83,7 +86,7 @@ const Login = memo((props) => {
             </Card>
         </Fragment>
     )
-});
+};
 
 const mapPropsToState = (state) => { return { auth: state.auth } }
 export default connect(mapPropsToState, actions)(Login);

@@ -1,11 +1,20 @@
-import {axiosFlaskApiLogin} from '../instances'
 
+import {
+    axiosFlaskApi,
+    axiosFlaskApiLogin
+} from '../instances'
 
 export const postLogin = (data) => {
-    console.log(data, 'login')
     return axiosFlaskApiLogin({
         method: 'POST',
         url: '/login',
         data
+    })
+}
+
+export const getLogout = () =>{
+    return axiosFlaskApi({
+        method: 'GET',
+        url: '/logout'
     })
 }
