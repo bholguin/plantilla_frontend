@@ -11,7 +11,6 @@ export const auth = (state = {
     errors: null,
 }, action) => {
 
-    console.log(action, 'action')
     switch (action.type) {
 
         case LOGIN_TYPE.USER_LOADING:
@@ -24,18 +23,11 @@ export const auth = (state = {
                 user: action.user,
             };
         case LOGIN_TYPE.LOGIN_SUCCESSFUL:
-            localStorage.setItem("token", action.payload.token);
-            localStorage.setItem("mi_cuenta", action.payload.account ? JSON.stringify(action.payload.account) : null);
-            localStorage.setItem("mis_permisos", action.payload.mis_permisos ? JSON.stringify(action.payload.mis_permisos) : null);
             return { ...state, ...action.payload, isAuthenticated: true, isLoading: false, errors: null };
-
         case LOGIN_TYPE.AUTHENTICATION_ERROR:
-            localStorage.removeItem("token");
-            localStorage.removeItem("mi_cuenta");
-            localStorage.removeItem("mis_permisos");
             return {
                 ...state,
-                errors: action.data,
+                errors: action.payload,
                 token: null,
                 user: null,
                 isAuthenticated: false,
@@ -45,10 +37,6 @@ export const auth = (state = {
             };
         case LOGIN_TYPE.LOGIN_FAILED:
         case LOGIN_TYPE.LOGOUT_SUCCESSFUL:
-            console.log('entro al logout');
-            localStorage.removeItem("token");
-            localStorage.removeItem("mi_cuenta");
-            localStorage.removeItem("mis_permisos");
             return {
                 ...state,
                 errors: action.payload,

@@ -6,16 +6,17 @@ export const PostLogin = (data) => {
         try {
             resolve(await LoginProvider.postLogin(data))
         } catch (e) {
+            console.log(e, 'error login')
             reject(e)
         }
     })
 }
 
-export const GetLogout = () =>{
+export const GetLogout = (token) =>{
     const {LoginProvider} = useProvider()
     return new Promise(async(resolve, reject) => {
         try {
-            resolve (await LoginProvider.getLogout())
+            resolve (await LoginProvider.getLogout(token))
         } catch (e) {
             reject(e)
         }

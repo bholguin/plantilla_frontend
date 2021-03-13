@@ -16,7 +16,6 @@ const Usuario = () => {
         postUser,
         createModal
     } = useUser()
-
     const [buttonProps] = useState({ tittle: 'Crear', submit: postUser })
 
     return (

@@ -1,19 +1,20 @@
 
 import {
     axiosFlaskApi,
-    axiosFlaskApiLogin
 } from '../instances'
 
 export const postLogin = (data) => {
-    return axiosFlaskApiLogin({
+    const api = axiosFlaskApi()
+    return api({
         method: 'POST',
         url: '/login',
         data
     })
 }
 
-export const getLogout = () =>{
-    return axiosFlaskApi({
+export const getLogout = (token) => {
+    const api = axiosFlaskApi(token)
+    return api({
         method: 'GET',
         url: '/logout'
     })
