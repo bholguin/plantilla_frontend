@@ -23,6 +23,7 @@ const AppRoutes = (PrivateRoute) => {
 
 const RootContainer = () => {
     const { auth } = useApp()
+    console.log(auth, 'auth')
     const PrivateRoute = ({ component: ChildComponent, ...rest }) => {
         return <Route {...rest} render={propsr => {
             if (auth.isLoading) {

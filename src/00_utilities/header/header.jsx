@@ -10,10 +10,8 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 
-import * as actions from '../../01_actions';
+
 //iconos
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -104,8 +102,4 @@ Header.propTypes = {
 };
 
 
-export default compose(
-    withStyles(header_app, { withTheme: true }),
-    connect(state => ({ place: '' }),
-        actions))
-    (Header);
+export default withStyles(header_app, { withTheme: true })(Header);

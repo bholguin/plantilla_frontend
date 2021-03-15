@@ -1,16 +1,8 @@
 import React from 'react';
 import RootContainer from "./routes";
-import { Provider } from "react-redux";
-import { useStoreApp } from "../03_redux";
+import { interceptorHandler } from "../04_provider/instances";
 
-const App = () => {
-    const { store } = useStoreApp()
-    return (
-        <Provider store={store}>
-            <RootContainer />
-        </Provider>
-    )
-}
+const App = () => <RootContainer />
 
-export default App
+export default interceptorHandler(App) 
 

@@ -8,22 +8,22 @@ export const useActUser = () => {
     const { UserService } = useServices()
 
     const actGetUsers = () => async (dispatch, getState) => {
-        try {
-            dispatch({
-                type: USUARIO_TYPES.LOAD
-            })
-            const res = await UserService.GetUsers(getState().auth.token)
-            dispatch({
-                type: USUARIO_TYPES.FEATCH_ALL,
-                payload: res.data
-            })
+        dispatch({
+            type: USUARIO_TYPES.LOAD
+        })
 
-        } catch (e) {
-            dispatch({
-                type: USUARIO_TYPES.ERROR,
-                payload: e
+        await UserService.GetUsers(getState().auth.token)
+            .then(res => {
+                dispatch({
+                    type: USUARIO_TYPES.FEATCH_ALL,
+                    payload: res.data
+                })
+            }).catch(e => {
+                dispatch({
+                    type: USUARIO_TYPES.ERROR,
+                    payload: e
+                })
             })
-        }
     }
 
     return {

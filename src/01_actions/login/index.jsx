@@ -50,16 +50,15 @@ export const useActLogin = () => {
         }
     }
 
-    const actLoadToken = () => (dispatch, getState) => {
-        dispatch({ type: "USER_LOADING" });
-        getState().auth.token ?
-            dispatch({ type: 'USER_LOADED' }) :
-            dispatch({ type: "AUTHENTICATION_ERROR" })
+    const actTokenError = () => (dispatch) => {
+        dispatch({
+            type: LOGIN_TYPE.LOGOUT_SUCCESSFUL
+        })
     }
 
     return {
         actPostLogin,
         actGetLogout,
-        actLoadToken
+        actTokenError
     }
 }

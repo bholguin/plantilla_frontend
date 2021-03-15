@@ -2,24 +2,11 @@ import React, { Fragment } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import LocalLibrary from '@material-ui/icons/LocalLibrary';
 import SettingsApplications from '@material-ui/icons/SettingsApplications';
 import Workspace from '../../workspace';
 import IconPanel from '../../00_utilities/icon_wrapper'
-
-
-const theme = createMuiTheme({
-    overrides: {
-        MuiSvgIcon: {
-            root: {
-                width: '3em',
-                height: '3em'
-            }
-        }
-    }
-})
-
 
 const useStyles = makeStyles({
     opciones: {

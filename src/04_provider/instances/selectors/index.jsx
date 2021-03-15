@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-export const authSelector = createSelector(
+export const tokenSelector = createSelector(
     state => state.auth,
-    auth => auth,
+    (auth) => auth.token
 );

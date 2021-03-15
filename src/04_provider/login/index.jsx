@@ -4,8 +4,7 @@ import {
 } from '../instances'
 
 export const postLogin = (data) => {
-    const api = axiosFlaskApi()
-    return api({
+    return axiosFlaskApi({
         method: 'POST',
         url: '/login',
         data
@@ -13,8 +12,7 @@ export const postLogin = (data) => {
 }
 
 export const getLogout = (token) => {
-    const api = axiosFlaskApi(token)
-    return api({
+    return axiosFlaskApi({
         method: 'GET',
         url: '/logout'
     })

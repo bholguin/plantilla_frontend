@@ -1,7 +1,6 @@
-import React, { Fragment, useState, useEffect, memo } from "react";
+import React, { Fragment } from "react";
 import { useForm, FormProvider } from 'react-hook-form';
 import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
 import classNames from 'classnames'
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -9,7 +8,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import ImgQueso from '../../00_utilities/img/queso.jpg';
-import * as actions from '../../01_actions';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormInputLogin } from '../../00_utilities/fields';
 import Alert from '@material-ui/lab/Alert';
@@ -28,20 +26,17 @@ const useStyles = makeStyles({
     buttonStyle: { width: '100%', backgroundColor: '#F0EEEE' }
 });
 
-const Login = (props) => {
+const Login = () => {
 
-    const {Login} = useLogin()
+    const { Login, auth } = useLogin()
     const methods = useForm()
     const { handleSubmit } = methods;
-    const [errorLogin, setErrorLogin] = useState(null);
-    const { auth } = props;
     const classes = useStyles();
-    useEffect(() => { setErrorLogin(auth.errors) }, [auth.errors]);
 
     if (auth.isAuthenticated) {
         return <Redirect to="/app" />
     }
-    
+
     return (
         <Fragment>
             <Card className={classes.cardStyle}>
@@ -57,8 +52,8 @@ const Login = (props) => {
                                 name="username"
                                 label="Username"
                                 fullWidth={true}
-                                autoFocus={true}  
-                                
+                                autoFocus={true}
+
                             />
                             <FormInputLogin
                                 name="password"
@@ -80,13 +75,12 @@ const Login = (props) => {
                     </CardActions>
                 </form>
                 {
-                    errorLogin &&
-                    <Alert severity="error">{errorLogin}</Alert>
+                    auth.errors &&
+                    <Alert severity="error">{auth.errors}</Alert>
                 }
             </Card>
         </Fragment>
     )
 };
 
-const mapPropsToState = (state) => { return { auth: state.auth } }
-export default connect(mapPropsToState, actions)(Login);
+export default Login;
