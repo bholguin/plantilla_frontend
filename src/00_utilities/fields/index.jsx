@@ -1,9 +1,13 @@
 import React, { Fragment } from 'react';
 import { Field } from 'redux-form';
 import PropTypes from "prop-types";
-import { TextField, createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useFormContext, Controller } from 'react-hook-form';
+import 'w3-css/w3.css'
+
+
+
 
 const useStyles = makeStyles({
     root: {
@@ -15,11 +19,31 @@ const useStyles = makeStyles({
     textField: {
         color: 'white'
     },
-    input_field:{
+    input_field: {
         margin: '15px'
     }
 });
 
+
+
+export const InputForm = (props) => {
+    const { label, type, name, value, placeholder } = props
+    return (
+        <Fragment>
+            <div class='w3-margin'>
+                <label class='w3-medium'>{label}</label>
+                <input
+                    class="w3-input"
+                    value={value}
+                    type={type}
+                    name={name}
+                    placeholder={placeholder}
+                    {...props}
+                />
+            </div>
+        </Fragment>
+    )
+}
 
 
 export const FromInput = (props) => {
@@ -30,7 +54,7 @@ export const FromInput = (props) => {
         <Controller
             as={TextField}
             name={name}
-            className ={classes.input_field}
+            className={classes.input_field}
             control={control}
             defaultValue=""
             label={label}
@@ -75,6 +99,7 @@ const renderTextField = ({ input, label, meta: { touched, error, warning }, ...c
         </Fragment>
     )
 };
+
 export const MyTextFieldSimple = (props) => {
     let normalize = null;
     if (props.case === 'U') {

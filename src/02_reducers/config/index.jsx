@@ -2,7 +2,12 @@ import { USUARIO_TYPES } from '../../01_actions/types'
 
 
 export const user = (state = {
-    list: []
+    list: [],
+    model: {
+        id: '',
+        nombre: '',
+        apellido: ''
+    }
 }, action) => {
     switch (action.type) {
         case USUARIO_TYPES.LOAD:

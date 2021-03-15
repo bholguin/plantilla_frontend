@@ -20,16 +20,15 @@ const CreateOrEdit = (props) => {
     console.log(props)
     const {
         open,
-        initialValues,
         buttonProps,
         closeModal
     } = useCOE()
-    console.log(buttonProps, 'buton')
+
     const {
         getValues
     } = props
 
-    const submit = () =>{
+    const submit = () => {
         buttonProps.submit({}, getValues());
     }
     return (
@@ -55,7 +54,7 @@ const CreateOrEdit = (props) => {
     )
 }
 
-CreateOrEdit.propTypes ={
+CreateOrEdit.propTypes = {
     getValues: PropTypes.func.isRequired
 }
 

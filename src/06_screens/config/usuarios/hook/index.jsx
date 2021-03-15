@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { userSelector } from "../selectors";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,7 +12,11 @@ import { useColumnTable } from '../props/table'
 export const useUser = () => {
     const { actGetUsers } = useActUser()
     const dispatch = useDispatch()
-    const users = useSelector(userSelector)
+    const [form, setForm] = useState(false)
+    const handleForm = () => setForm(!form)
+
+
+    const {list, model} = useSelector(userSelector)
     const columns = useColumnTable()
     const createModal = () => dispatch(
         actOpenCOEModal({
@@ -25,12 +29,14 @@ export const useUser = () => {
     useEffect(() => {
         dispatch(actGetUsers())
     }, [dispatch])
-
+    console.log(list)
     return {
-        users,
+        users: list,
         columns,
+        form,
         postUser,
-        createModal
+        createModal,
+        handleForm
     }
 }
 

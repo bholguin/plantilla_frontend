@@ -6,11 +6,12 @@ import PropTypes from 'prop-types';
 
 const ButtonCreate = (props) => {
     const {
+        handleForm,
         open_modal,
         buttonProps
     } = props;
     return (
-        <IconButton variant="fab" color="secondary" aria-label="add" style={button_create} onClick={() => open_modal(buttonProps)}>
+        <IconButton variant="fab" color="secondary" aria-label="add" style={button_create} onClick={() => handleForm()}>
             <AddIcon />
         </IconButton>
     );
