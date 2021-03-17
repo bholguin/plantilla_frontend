@@ -6,13 +6,13 @@ import useServices from "../../../05_services";
 export const useActUser = () => {
 
     const { UserService } = useServices()
-
-    const actGetUsers = () => async (dispatch, getState) => {
+    
+    const actGetUsers = () => async (dispatch) => {
         dispatch({
             type: USUARIO_TYPES.LOAD
         })
 
-        await UserService.GetUsers(getState().auth.token)
+        await UserService.GetUsers()
             .then(res => {
                 dispatch({
                     type: USUARIO_TYPES.FEATCH_ALL,
@@ -26,31 +26,26 @@ export const useActUser = () => {
             })
     }
 
+    const actFeatcData = (data) => dispatch => {
+        dispatch({
+            type: USUARIO_TYPES.FEATCH,
+            payload: data
+        })
+    }
+
+    const actClearUser = () => dispatch => {
+        dispatch({
+            type: USUARIO_TYPES.CLEAR
+        })
+    }
+
     return {
-        actGetUsers
+        actGetUsers,
+        actFeatcData,
+        actClearUser
     }
 }
 
-
-export const actGetUsers = () => async (dispatch, getState) => {
-    const { UserService } = useServices()
-    try {
-        dispatch({
-            type: USUARIO_TYPES.LOAD
-        })
-        const res = await UserService.GetUsers(getState().auth.token)
-        dispatch({
-            type: USUARIO_TYPES.FEATCH_ALL,
-            payload: res.data
-        })
-
-    } catch (e) {
-        dispatch({
-            type: USUARIO_TYPES.ERROR,
-            payload: e
-        })
-    }
-}
 
 
 

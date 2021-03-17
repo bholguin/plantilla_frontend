@@ -35,15 +35,13 @@ export const useActLogin = () => {
         }
     }
 
-    const actGetLogout = () => async (dispatch, getState) => {
+    const actGetLogout = () => async (dispatch) => {
         try {
-            const res = await LoginService.GetLogout(getState().auth.token)
-            console.log(res, 'logout')
+            const res = await LoginService.GetLogout()
             dispatch({
                 type: LOGIN_TYPE.LOGOUT_SUCCESSFUL
             })
         } catch (e) {
-            console.log(e, 'error')
             dispatch({
                 type: LOGIN_TYPE.LOGIN_FAILED
             })

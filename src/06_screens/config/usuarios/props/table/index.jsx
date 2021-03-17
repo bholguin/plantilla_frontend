@@ -7,14 +7,23 @@ import {
     actOpenCOEModal,
     actOpenDeleteItem
 } from '../../../../../01_actions/common'
+import { useActUser } from "../../../../../01_actions/config/user";
 //hook
 import { useUser } from "../../hook";
 
 export const useColumnTable = () => {
-
+    const {actFeatcData} = useActUser()
     const dispatch = useDispatch()
     const openDeleteItem = () => dispatch(actOpenDeleteItem())
+    const openEditModal = (item) => {
+        dispatch(actFeatcData(item))
+        dispatch(actOpenCOEModal({
+            tittle: 'Editar',
+            submit: () => {
 
+            }
+        }))
+    }
     const columns = [
         {
             id: 'user',
@@ -38,7 +47,7 @@ export const useColumnTable = () => {
                     classes: { width: '20%' },
                     Cell: ({ row }) => (
                         <span>
-                            <IconButton onClick={()=>{}}>
+                            <IconButton onClick={() => openEditModal(row.original)}>
                                 <EditIcon />
                             </IconButton>
                             <IconButton onClick={() => openDeleteItem()}>

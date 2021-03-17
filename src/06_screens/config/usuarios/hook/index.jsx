@@ -12,12 +12,16 @@ import { useColumnTable } from '../props/table'
 
 export const useUser = () => {
     const dispatch = useDispatch()
-    const { actGetUsers } = useActUser()
+    const { actGetUsers, actClearUser } = useActUser()
 
-    const {user, createoredit} = useSelector(userSelector)
+    const { user, createoredit } = useSelector(userSelector)
     const columns = useColumnTable()
 
-    const handleFormClose = () => dispatch(actCloseCOEModal())
+    const handleFormClose = () => {
+        dispatch(actClearUser())
+        dispatch(actCloseCOEModal())
+    }
+    
     const handleFormOpen = () => dispatch(
         actOpenCOEModal({
             tittle: 'Crear',
@@ -31,7 +35,7 @@ export const useUser = () => {
         dispatch(actGetUsers())
     }, [dispatch])
 
-    return {   
+    return {
         users: user.list,
         columns,
         createoredit,

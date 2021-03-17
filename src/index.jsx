@@ -6,11 +6,11 @@ import { Provider } from "react-redux";
 import { useStoreApp } from "./03_redux";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <Provider store={useStoreApp().store}>
       <App />
       <SpinnerLoadingIndicator />
     </Provider>
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById('root')
 );

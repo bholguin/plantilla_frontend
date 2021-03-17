@@ -6,7 +6,9 @@ export const user = (state = {
     model: {
         id: '',
         nombre: '',
-        apellido: ''
+        apellido: '',
+        username: '',
+        id_publico: ''
     }
 }, action) => {
     switch (action.type) {
@@ -19,11 +21,28 @@ export const user = (state = {
                 ...state,
                 list: action.payload
             }
+        case USUARIO_TYPES.FEATCH:
+            return {
+                ...state,
+                model: action.payload
+            }
+        case USUARIO_TYPES.CLEAR:
+            return {
+                ...state,
+                model: {
+                    id: '',
+                    nombre: '',
+                    apellido: '',
+                    username: '',
+                    id_publico: ''
+                }
+            }
         case USUARIO_TYPES.ERROR:
             return {
                 ...state,
                 error: action.payload
             }
+
         default:
             return state
     }

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, forwardRef } from 'react';
 import { Field } from 'redux-form';
 import PropTypes from "prop-types";
 import { TextField } from '@material-ui/core';
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 
 
 
-export const InputForm = (props) => {
+export const InputForm = forwardRef((props, ref) => {
     const { label, type, name, value, placeholder } = props
     return (
         <Fragment>
@@ -38,11 +38,28 @@ export const InputForm = (props) => {
                     type={type}
                     name={name}
                     placeholder={placeholder}
+                    ref={ref}
                     {...props}
                 />
             </div>
         </Fragment>
     )
+})
+
+InputForm.propTypes = {
+    label: PropTypes.string,
+    type: PropTypes.string,
+    name: PropTypes.string,
+    defaultValue: PropTypes.string,
+    placeholder: PropTypes.string
+}
+
+InputForm.defaultProps = {
+    label: '',
+    type: '',
+    name: '',
+    defaultValue: '',
+    placeholder: ''
 }
 
 
