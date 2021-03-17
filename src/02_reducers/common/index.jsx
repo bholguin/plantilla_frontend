@@ -5,7 +5,6 @@ import {
 
 export const createoredit = (state = {
     open: false,
-    initialValues: {},
     buttonProps: {
         tittle: '',
         submit: () => { }
@@ -16,15 +15,13 @@ export const createoredit = (state = {
             return {
                 ...state,
                 open: false,
-                initialValues: state.initialValues,
-                buttonProps: state.buttonProps
+                buttonProps: {}
             };
         case COE_MODAL_TYPE.OPEN:
             return {
                 ...state,
                 open: true,
-                initialValues: actions.initialValues ? actions.initialValues : state.initialValues,
-                buttonProps: actions.buttonProps
+                buttonProps: actions.payload
             };
         default:
             return state;

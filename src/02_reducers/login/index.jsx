@@ -2,17 +2,16 @@
 import { LOGIN_TYPE } from "../../01_actions/types";
 
 export const auth = (state = {
-    token: localStorage.getItem("token"),
-    mi_cuenta: JSON.parse(localStorage.getItem("mi_cuenta")),
-    mis_permisos: JSON.parse(localStorage.getItem("mis_permisos")),
+    mi_cuenta: {},
+    mis_permisos: {},
     isAuthenticated: false,
     isLoading: true,
     user: null,
     errors: null,
+    token: ''
 }, action) => {
-
+    console.log(action, 'action auth')
     switch (action.type) {
-
         case LOGIN_TYPE.USER_LOADING:
             return { ...state, isLoading: true };
         case LOGIN_TYPE.USER_LOADED:

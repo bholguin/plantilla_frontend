@@ -30,10 +30,10 @@ export const InputForm = (props) => {
     const { label, type, name, value, placeholder } = props
     return (
         <Fragment>
-            <div class='w3-margin'>
-                <label class='w3-medium'>{label}</label>
+            <div className='w3-margin'>
+                <label className='w3-small'>{label}</label>
                 <input
-                    class="w3-input"
+                    className="w3-input"
                     value={value}
                     type={type}
                     name={name}

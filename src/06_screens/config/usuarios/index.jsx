@@ -13,20 +13,14 @@ const Usuario = () => {
     const {
         users,
         columns,
-        form,
-        postUser,
-        createModal,
-        handleForm,
+        handleFormOpen,
     } = useUser()
-    const [buttonProps] = useState({ tittle: 'Crear', submit: postUser })
-
     return (
         <Workspace>
             <AlertDelete />
-            <ModalForm />
-            <ButtonCreate open_modal={createModal} buttonProps={buttonProps} handleForm={handleForm} />
+            <ButtonCreate handleForm={handleFormOpen} />
             <TableApp columns={columns} data={users} />
-            <Form open={form} handleForm={handleForm} />
+            <Form />
         </Workspace>
     )
 };

@@ -26,9 +26,7 @@ const RootContainer = () => {
     console.log(auth, 'auth')
     const PrivateRoute = ({ component: ChildComponent, ...rest }) => {
         return <Route {...rest} render={propsr => {
-            if (auth.isLoading) {
-                return <em>Loading...</em>;
-            } else if (!auth.isAuthenticated) {
+            if (!auth.isAuthenticated) {
                 return <Redirect to="/app/login" />;
             } else {
                 return <ChildComponent {...propsr} />

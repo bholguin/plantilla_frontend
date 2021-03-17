@@ -10,10 +10,11 @@ export const actCloseCOEModal = () => dispatch => {
     })
 }
 
-export const actOpenCOEModal = (buttonProps = {}) => dispatch => {
+export const actOpenCOEModal = (data) => dispatch => {
+    console.log('entro al action')
     dispatch({
         type: COE_MODAL_TYPE.OPEN,
-        buttonProps: buttonProps
+        payload: data
     })
 }
 

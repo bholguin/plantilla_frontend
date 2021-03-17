@@ -8,14 +8,12 @@ import {
     actOpenDeleteItem
 } from '../../../../../01_actions/common'
 //hook
+import { useUser } from "../../hook";
 
 export const useColumnTable = () => {
 
     const dispatch = useDispatch()
     const openDeleteItem = () => dispatch(actOpenDeleteItem())
-    const editModal = () => dispatch(actOpenCOEModal({
-        tittle: 'Editar'
-    }))
 
     const columns = [
         {
@@ -40,7 +38,7 @@ export const useColumnTable = () => {
                     classes: { width: '20%' },
                     Cell: ({ row }) => (
                         <span>
-                            <IconButton onClick={() => editModal()}>
+                            <IconButton onClick={()=>{}}>
                                 <EditIcon />
                             </IconButton>
                             <IconButton onClick={() => openDeleteItem()}>

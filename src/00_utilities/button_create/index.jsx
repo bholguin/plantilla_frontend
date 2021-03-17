@@ -6,9 +6,7 @@ import PropTypes from 'prop-types';
 
 const ButtonCreate = (props) => {
     const {
-        handleForm,
-        open_modal,
-        buttonProps
+        handleForm
     } = props;
     return (
         <IconButton variant="fab" color="secondary" aria-label="add" style={button_create} onClick={() => handleForm()}>
@@ -18,8 +16,7 @@ const ButtonCreate = (props) => {
 }
 
 ButtonCreate.propTypes = {
-    open_modal: PropTypes.func.isRequired,
-    buttonProps: PropTypes.object.isRequired
+    handleForm: PropTypes.func.isRequired
 }
 
 export default ButtonCreate;

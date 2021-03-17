@@ -1,10 +1,11 @@
 import useProvider from "../../04_provider";
+import { trackPromise } from 'react-promise-tracker'
 
 export const PostLogin = (data) => {
     const { LoginProvider } = useProvider();
-    return new Promise(async(resolve, reject)=>{
+    return new Promise(async (resolve, reject) => {
         try {
-            resolve(await LoginProvider.postLogin(data))
+            resolve(await trackPromise(LoginProvider.postLogin(data)))
         } catch (e) {
             console.log(e, 'error login')
             reject(e)
@@ -12,11 +13,11 @@ export const PostLogin = (data) => {
     })
 }
 
-export const GetLogout = (token) =>{
-    const {LoginProvider} = useProvider()
-    return new Promise(async(resolve, reject) => {
+export const GetLogout = () => {
+    const { LoginProvider } = useProvider()
+    return new Promise(async (resolve, reject) => {
         try {
-            resolve (await LoginProvider.getLogout(token))
+            resolve(await trackPromise(LoginProvider.getLogout()))
         } catch (e) {
             reject(e)
         }

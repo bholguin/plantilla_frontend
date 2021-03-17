@@ -5,38 +5,39 @@ import {
     useActUser
 } from "../../../../01_actions/config/user";
 import {
-    actOpenCOEModal
+    actOpenCOEModal,
+    actCloseCOEModal
 } from '../../../../01_actions/common'
 import { useColumnTable } from '../props/table'
 
 export const useUser = () => {
-    const { actGetUsers } = useActUser()
     const dispatch = useDispatch()
-    const [form, setForm] = useState(false)
-    const handleForm = () => setForm(!form)
+    const { actGetUsers } = useActUser()
 
-
-    const {list, model} = useSelector(userSelector)
+    const {user, createoredit} = useSelector(userSelector)
     const columns = useColumnTable()
-    const createModal = () => dispatch(
+
+    const handleFormClose = () => dispatch(actCloseCOEModal())
+    const handleFormOpen = () => dispatch(
         actOpenCOEModal({
-            tittle: 'Crear'
+            tittle: 'Crear',
+            submit: () => {
+
+            }
         })
     )
-
-    const postUser = () => { }
 
     useEffect(() => {
         dispatch(actGetUsers())
     }, [dispatch])
-    console.log(list)
-    return {
-        users: list,
+
+    return {   
+        users: user.list,
         columns,
-        form,
-        postUser,
-        createModal,
-        handleForm
+        createoredit,
+        model: user.model,
+        handleFormOpen,
+        handleFormClose
     }
 }
 
