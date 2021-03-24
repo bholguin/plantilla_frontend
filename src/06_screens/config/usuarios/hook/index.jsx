@@ -26,7 +26,6 @@ export const useUser = () => {
 
     const submit = (data) => dispatch(createoredit.buttonProps.submit(data))
 
-
     const handleFormOpen = () => dispatch(
         actOpenCOEModal({
             tittle: 'Crear',

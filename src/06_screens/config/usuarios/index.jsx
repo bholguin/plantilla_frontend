@@ -13,9 +13,7 @@ const Usuario = () => {
     const {
         users,
         columns,
-        handleFormOpen,
-        handleFormClose,
-        handleCloseModalDelete
+        handleFormOpen
     } = useUser()
     return (
         <Workspace>
