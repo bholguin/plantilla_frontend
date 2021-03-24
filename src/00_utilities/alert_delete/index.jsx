@@ -6,12 +6,14 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import { useAlertDelete } from "./hook";
+import { deleteUser } from '../../04_provider/config/user';
 
 
 const AlertDelete = () => {
     const{
         open,
-        closeModal
+        closeModal,
+        deleteItem
     }= useAlertDelete()
 
 
@@ -29,10 +31,10 @@ const AlertDelete = () => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={closeModal} color="primary">
-                    Disagree
+                    {'Cancelr'}
           </Button>
-                <Button onClick={closeModal} color="primary" autoFocus>
-                    Agree
+                <Button onClick={deleteItem} color="primary" autoFocus>
+                    {'Eliminar'}
           </Button>
             </DialogActions>
         </Dialog>

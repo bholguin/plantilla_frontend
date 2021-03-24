@@ -11,7 +11,6 @@ export const actCloseCOEModal = () => dispatch => {
 }
 
 export const actOpenCOEModal = (data) => dispatch => {
-    console.log('entro al action')
     dispatch({
         type: COE_MODAL_TYPE.OPEN,
         payload: data
@@ -24,8 +23,9 @@ export const actCloseDeleteItem = () => dispatch => {
     })
 }
 
-export const actOpenDeleteItem = () => dispatch => {
+export const actOpenDeleteItem = (data) => dispatch => {
     dispatch({
-        type: DELETE_MODAL_TYPE.OPEN
+        type: DELETE_MODAL_TYPE.OPEN,
+        payload: data
     })
 }

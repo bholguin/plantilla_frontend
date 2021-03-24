@@ -5,23 +5,27 @@ import EditIcon from '@material-ui/icons/Edit';
 import { useDispatch } from 'react-redux'
 import {
     actOpenCOEModal,
-    actOpenDeleteItem
+    actOpenDeleteItem,
 } from '../../../../../01_actions/common'
 import { useActUser } from "../../../../../01_actions/config/user";
 //hook
-import { useUser } from "../../hook";
 
-export const useColumnTable = () => {
-    const {actFeatcData} = useActUser()
+
+export const useColumnTable = ({ handleFormClose, handleCloseModalDelete }) => {
     const dispatch = useDispatch()
-    const openDeleteItem = () => dispatch(actOpenDeleteItem())
+    const { actFeatcData, actUpdateUser, actDeleteUser } = useActUser()
+    
+    const openDeleteItem = (item) => {
+        dispatch(actOpenDeleteItem({
+            submit: (id) => actDeleteUser(id, ()=> handleCloseModalDelete()),
+            item: item.id
+        }))
+    }
     const openEditModal = (item) => {
         dispatch(actFeatcData(item))
         dispatch(actOpenCOEModal({
             tittle: 'Editar',
-            submit: () => {
-
-            }
+            submit: (data) => actUpdateUser(data, () => handleFormClose())
         }))
     }
     const columns = [
@@ -50,7 +54,7 @@ export const useColumnTable = () => {
                             <IconButton onClick={() => openEditModal(row.original)}>
                                 <EditIcon />
                             </IconButton>
-                            <IconButton onClick={() => openDeleteItem()}>
+                            <IconButton onClick={() => openDeleteItem(row.original)}>
                                 <DeleteForeverIcon />
                             </IconButton>
                         </span>

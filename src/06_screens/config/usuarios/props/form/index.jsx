@@ -10,12 +10,10 @@ const Form = () => {
     const {
         model,
         createoredit,
-        handleFormClose
+        handleFormClose,
+        submit
     } = useUser()
 
-    const submit = (data) => {
-        console.log(data, 'submit form')
-    }
 
 
     return (
@@ -30,6 +28,7 @@ const Form = () => {
                 </DialogTitle>
                 <form onSubmit={handleSubmit(submit)}>
                     <DialogContent>
+                        <input ref={register} name='id' defaultValue={model.id} type='hidden' />
                         <InputForm label='Nombre' ref={register} defaultValue={model.nombre} type='text' name='nombre' placeholder={'ingrese nombre...'} />
                         <InputForm label='Apellido' ref={register} defaultValue={model.apellido} type='text' name='apellido' placeholder={'ingrese apellido...'} />
                         <InputForm label='Username' ref={register} defaultValue={model.username} type='text' name='username' placeholder={'ingrese username...'} />

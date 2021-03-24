@@ -11,3 +11,37 @@ export const GetUsers = () => {
         }
     })
 }
+
+
+export const PostUsers = (data) => {
+    const { UserProvider } = useProvider();
+    return new Promise(async (resolve, reject) => {
+        try {
+            resolve(await trackPromise(UserProvider.postUser(data)))
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+export const PutUsers = (data) => {
+    const { UserProvider } = useProvider();
+    return new Promise(async (resolve, reject) => {
+        try {
+            resolve(await trackPromise(UserProvider.putUser(data)))
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+export const DeleteUsers = (data) => {
+    const { UserProvider } = useProvider();
+    return new Promise(async (resolve, reject) => {
+        try {
+            resolve(await trackPromise(UserProvider.deleteUser(data)))
+        } catch (e) {
+            reject(e)
+        }
+    })
+}

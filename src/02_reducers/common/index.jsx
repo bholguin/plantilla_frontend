@@ -1,5 +1,5 @@
-import { 
-    COE_MODAL_TYPE, 
+import {
+    COE_MODAL_TYPE,
     DELETE_MODAL_TYPE
 } from "../../01_actions/types";
 
@@ -21,7 +21,10 @@ export const createoredit = (state = {
             return {
                 ...state,
                 open: true,
-                buttonProps: actions.payload
+                buttonProps: {
+                    tittle: actions.payload.tittle,
+                    submit: (data) => actions.payload.submit(data)
+                }
             };
         default:
             return state;
@@ -31,18 +34,23 @@ export const createoredit = (state = {
 
 
 export const alertdelete = (state = {
-    open: false
+    open: false,
+    submit: () => {},
+    item: 0
 }, actions) => {
     switch (actions.type) {
         case DELETE_MODAL_TYPE.CLOSE:
             return {
                 ...state,
-                open: false
+                open: false,
+                submit: () => {}
             };
         case DELETE_MODAL_TYPE.OPEN:
             return {
                 ...state,
-                open: true
+                open: true,
+                submit: (data) => actions.payload.submit(data),
+                item: actions.payload.item
             };
         default:
             return state;

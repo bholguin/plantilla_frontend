@@ -4,10 +4,13 @@ import { actCloseDeleteItem } from '../../../01_actions/common'
 
 export const useAlertDelete = () => {
     const dispatch = useDispatch()
-    const { open } = useSelector(deleteModalSelector)
+    const { open, submit, item } = useSelector(deleteModalSelector)
     const closeModal = () => dispatch(actCloseDeleteItem())
+    const deleteItem = () => dispatch(submit(item, () => closeModal()))
+    
     return{
         open,
-        closeModal
+        closeModal,
+        deleteItem
     }
 }
