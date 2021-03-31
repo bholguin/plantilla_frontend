@@ -36,16 +36,18 @@ export const useActLogin = () => {
     }
 
     const actGetLogout = () => async (dispatch) => {
-        try {
-            const res = await LoginService.GetLogout()
-            dispatch({
-                type: LOGIN_TYPE.LOGOUT_SUCCESSFUL
+        await LoginService.GetLogout()
+            .then(res => {
+                dispatch({
+                    type: LOGIN_TYPE.LOGOUT_SUCCESSFUL
+                })
             })
-        } catch (e) {
-            dispatch({
-                type: LOGIN_TYPE.LOGIN_FAILED
+            .catch(e => {
+                dispatch({
+                    type: LOGIN_TYPE.LOGIN_FAILED,
+                    payload: e
+                })
             })
-        }
     }
 
     const actTokenError = () => (dispatch) => {

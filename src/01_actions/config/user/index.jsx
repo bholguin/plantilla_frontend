@@ -2,10 +2,12 @@ import {
     USUARIO_TYPES
 } from "../../types";
 import useServices from "../../../05_services";
+import { useToast } from '../../../00_utilities/Toast/hook'
 
 export const useActUser = () => {
 
     const { UserService } = useServices()
+    const { Toast, SUCCESS } = useToast();
 
     const actGetUsers = () => async (dispatch) => {
         dispatch({
@@ -36,6 +38,7 @@ export const useActUser = () => {
                 if (callback) {
                     callback()
                 }
+                Toast('Se editó con exito...', SUCCESS)
             }).catch(e => {
                 dispatch({
                     type: USUARIO_TYPES.ERROR,
@@ -58,6 +61,7 @@ export const useActUser = () => {
                 if (callback) {
                     callback()
                 }
+                Toast('Se creó con exito...', SUCCESS)
             }).catch(e => {
                 dispatch({
                     type: USUARIO_TYPES.ERROR,
@@ -67,7 +71,6 @@ export const useActUser = () => {
     }
 
     const actDeleteUser = (data, callback) => async (dispatch) => {
-        console.log(callback, 'callback')
         dispatch({
             type: USUARIO_TYPES.LOAD
         })
@@ -80,6 +83,7 @@ export const useActUser = () => {
                 if (callback) {
                     callback()
                 }
+                Toast('Se eliminó con exito...', SUCCESS)
             }).catch(e => {
                 dispatch({
                     type: USUARIO_TYPES.ERROR,

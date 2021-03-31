@@ -10,7 +10,6 @@ export const auth = (state = {
     errors: null,
     token: ''
 }, action) => {
-    console.log(action, 'action auth')
     switch (action.type) {
         case LOGIN_TYPE.USER_LOADING:
             return { ...state, isLoading: true };

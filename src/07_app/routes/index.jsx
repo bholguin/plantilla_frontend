@@ -23,15 +23,14 @@ const AppRoutes = (PrivateRoute) => {
 
 const RootContainer = () => {
     const { auth } = useApp()
-    console.log(auth, 'auth')
     const PrivateRoute = ({ component: ChildComponent, ...rest }) => {
-        return <Route {...rest} render={propsr => {
+        return <Route {...rest} render={props => {
             if (auth.isLoading) {
                 return <em>Loading...</em>;
             } else if (!auth.isAuthenticated) {
                 return <Redirect to="/app/login" />;
             } else {
-                return <ChildComponent {...propsr} />
+                return <ChildComponent {...props} />
             }
         }} />
     };

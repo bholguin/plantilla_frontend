@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import { tokenSelector } from "./selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { useActLogin } from '../../01_actions/login'
+import { useToast } from "../../00_utilities/Toast/hook";
 
 export const axiosFlaskApi = axios.create({
     baseURL: process.env.REACT_APP_FLASK_API
@@ -13,11 +14,11 @@ export const axiosFlaskApi = axios.create({
 export const interceptorHandler = (WrappedComponent) => props => {
     const dispatch = useDispatch()
     const { actTokenError } = useActLogin()
+    const { Toast, ERROR } = useToast()
     const handleResponseError = (error) => {
-        const callToast = (error) => {
-            console.log(error, 'error toast')
+        const callToast = (content) => {
+            Toast(content, ERROR)
         }
-
         switch (error.response.status) {
             case 400:
                 callToast(error.response.data.message)

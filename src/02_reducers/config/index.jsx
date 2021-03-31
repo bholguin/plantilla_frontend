@@ -39,7 +39,13 @@ export const user = (state = {
         case USUARIO_TYPES.CLEAR:
             return {
                 ...state,
-                model: { ...state.model }
+                model: {
+                    id: '',
+                    nombre: '',
+                    apellido: '',
+                    username: '',
+                    id_publico: ''
+                }
             }
         case USUARIO_TYPES.DELETE:
             return {
