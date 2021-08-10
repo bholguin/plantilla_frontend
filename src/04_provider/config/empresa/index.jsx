@@ -9,8 +9,7 @@ export const useEmpresaProvider = () => {
         })
     }
 
-    const postEmpresa = (data) =>{
-        console.log(data, 'provider')
+    const postEmpresa = (data) => {
         return axiosFlaskApi({
             method: 'POST',
             url: '/empresa',
@@ -18,9 +17,26 @@ export const useEmpresaProvider = () => {
         })
     }
 
-    return{
-        getEmpresas,
-        postEmpresa
+    const putEmpresa = (data) => {
+        return axiosFlaskApi({
+            method: 'PUT',
+            url: '/empresa',
+            data
+        })
     }
-    
+
+    const deleteEmpresa = (id) =>{
+        return axiosFlaskApi({
+            method: 'DELETE',
+            url: `/empresa/${id}`
+        })
+    }
+
+    return {
+        getEmpresas,
+        postEmpresa,
+        putEmpresa,
+        deleteEmpresa
+    }
+
 }

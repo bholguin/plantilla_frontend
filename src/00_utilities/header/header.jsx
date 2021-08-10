@@ -17,7 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import SettingsApplications from '@material-ui/icons/SettingsApplications';
-import LocalLibrary from '@material-ui/icons/LocalLibrary';
+import DonutSmall from '@material-ui/icons/DonutSmall';
 import Home from '@material-ui/icons/Home';
 
 import { header_app } from '../css';
@@ -81,8 +81,8 @@ const Header = (props) => {
                     </Link>
                 </List>
                 <List>
-                    <Link to="/app/config" className={classes.linkIcons}>
-                    <LocalLibrary /><span className={classes.IconTag} >Inventario</span>
+                    <Link to="/app/sig" className={classes.linkIcons}>
+                    <DonutSmall /><span className={classes.IconTag} >SIG</span>
                     </Link>
                 </List>
             </Drawer>

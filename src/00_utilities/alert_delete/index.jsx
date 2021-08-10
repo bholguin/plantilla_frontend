@@ -4,14 +4,11 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
-import { useAlertDelete } from "./hook";
+import PropTypes from "prop-types"
 
-const AlertDelete = () => {
-    const {
-        open,
-        closeModal,
-        deleteItem
-    } = useAlertDelete()
+const AlertDelete = (props) => {
+
+    const { open, onClose, onDelete } = props
 
     return (
         <Dialog
@@ -25,10 +22,10 @@ const AlertDelete = () => {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={closeModal} className={'w3-dark-grey'}>
+                <Button onClick={onClose} className={'w3-dark-grey'}>
                     {'Cancelar'}
                 </Button>
-                <Button onClick={deleteItem} className={'w3-indigo'} autoFocus>
+                <Button onClick={onDelete} className={'w3-indigo'} autoFocus>
                     {'Eliminar'}
                 </Button>
             </DialogActions>
@@ -36,5 +33,16 @@ const AlertDelete = () => {
     )
 }
 
+AlertDelete.propTypes = {
+    open: PropTypes.bool,
+    onClose: PropTypes.func,
+    onDelete: PropTypes.func
+}
+
+AlertDelete.defaultProps = {
+    open: false,
+    onClose: () => { },
+    onDelete: () => { }
+}
 
 export default AlertDelete;

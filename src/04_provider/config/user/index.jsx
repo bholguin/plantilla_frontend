@@ -1,35 +1,43 @@
 import { axiosFlaskApi } from "../../instances";
 
 
-export const getUsers = () => {
-    return axiosFlaskApi({
-        method: 'GET',
-        url: '/usuarios'
-    })
-}
+export const useUsuarioProvider = () => {
 
-export const postUser = (data) =>{
-    console.log(data, 'provider')
-    return axiosFlaskApi({
-        method: 'POST',
-        url: '/usuario',
-        data
-    })
-}
+    const getUsers = () => {
+        return axiosFlaskApi({
+            method: 'GET',
+            url: '/usuarios'
+        })
+    }
 
-export const putUser = (data) =>{
-    console.log(data, 'provider')
-    return axiosFlaskApi({
-        method: 'PUT',
-        url: '/usuario',
-        data
-    })
-}
+    const postUser = (data) => {
+        return axiosFlaskApi({
+            method: 'POST',
+            url: '/usuario',
+            data
+        })
+    }
 
-export const deleteUser = (id) =>{
-    console.log(id, 'data')
-    return axiosFlaskApi({
-        method: 'DELETE',
-        url: `/usuario/${id}`
-    })
+    const putUser = (data) => {
+        return axiosFlaskApi({
+            method: 'PUT',
+            url: '/usuario',
+            data
+        })
+    }
+
+    const deleteUser = (id) => {
+        return axiosFlaskApi({
+            method: 'DELETE',
+            url: `/usuario/${id}`
+        })
+    }
+
+
+    return {
+        getUsers,
+        postUser,
+        putUser,
+        deleteUser
+    }
 }

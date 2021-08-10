@@ -3,8 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography';
 import SupervisorAccount from '@material-ui/icons/SupervisorAccount';
-import LocalLibrary from '@material-ui/icons/LocalLibrary';
-import AirportShuttle from '@material-ui/icons/AirportShuttle';
+import Business from '@material-ui/icons/Business';
 import Workspace from '../../workspace';
 import IconPanel from '../../00_utilities/icon_wrapper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -31,7 +30,7 @@ const Config = () => {
                 <Grid item xs={4} className={classes.opciones}>
                     <IconPanel>
                         <Link to='/app/config/empresas'>
-                            <LocalLibrary />
+                            <Business />
                             <Typography>Empresas</Typography>
                         </Link>
                     </IconPanel>

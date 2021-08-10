@@ -6,110 +6,61 @@ import { useToast } from '../../../00_utilities/Toast/hook'
 
 export const useActUser = () => {
 
-    const { UserService } = useServices()
+    const { useUsuarioServices } = useServices()
     const { Toast, EDIT_SUCCESS, CREATE_SUCCESS, DELETE_SUCCESS } = useToast();
+    const {
+        GetUsers,
+        PostUser,
+        PutUser,
+        DeleteUser
+    } = useUsuarioServices()
 
     const actGetUsers = () => async (dispatch) => {
-        dispatch({
-            type: USUARIO_TYPES.LOAD
-        })
-
-        await UserService.GetUsers()
-            .then(res => {
-                dispatch({
-                    type: USUARIO_TYPES.FEATCH_ALL,
-                    payload: res.data
-                })
-            }).catch(e => {
-                dispatch({
-                    type: USUARIO_TYPES.ERROR,
-                    payload: e
-                })
+        try {
+            const res = await GetUsers()
+            dispatch({
+                type: USUARIO_TYPES.SUCCESS,
+                payload: res.data
             })
+        } catch (e) {
+
+        }
     }
 
-    const actUpdateUser = (data, callback) => async (dispatch) => {
-        await UserService.PutUsers(data)
-            .then(res => {
-                dispatch({
-                    type: USUARIO_TYPES.UPDATE,
-                    payload: res.data
-                })
-                if (callback) {
-                    callback()
-                }
-                Toast(EDIT_SUCCESS)
-            }).catch(e => {
-                dispatch({
-                    type: USUARIO_TYPES.ERROR,
-                    payload: e
-                })
-            })
+    const actUpdateUser = ({ data, onSuccess }) => async () => {
+        try {
+            await PutUser(data)
+            Toast(EDIT_SUCCESS)
+            onSuccess && onSuccess()
+        } catch (e) {
+
+        }
     }
 
-    const actCreateUser = (data, callback) => async (dispatch) => {
-        dispatch({
-            type: USUARIO_TYPES.LOAD
-        })
+    const actCreateUser = ({ data, onSuccess }) => async () => {
+        try {
+            await PostUser(data)
+            Toast(CREATE_SUCCESS)
+            onSuccess && onSuccess()
+        } catch (e) {
 
-        await UserService.PostUsers(data)
-            .then(res => {
-                dispatch({
-                    type: USUARIO_TYPES.CREATE,
-                    payload: res.data
-                })
-                if (callback) {
-                    callback()
-                }
-                Toast(CREATE_SUCCESS)
-            }).catch(e => {
-                dispatch({
-                    type: USUARIO_TYPES.ERROR,
-                    payload: e
-                })
-            })
+        }
     }
 
-    const actDeleteUser = (data, callback) => async (dispatch) => {
-        dispatch({
-            type: USUARIO_TYPES.LOAD
-        })
-        await UserService.DeleteUsers(data)
-            .then(res => {
-                dispatch({
-                    type: USUARIO_TYPES.DELETE,
-                    payload: res.data
-                })
-                if (callback) {
-                    callback()
-                }
-                Toast(DELETE_SUCCESS)
-            }).catch(e => {
-                dispatch({
-                    type: USUARIO_TYPES.ERROR,
-                    payload: e
-                })
-            })
+    const actDeleteUser = ({ data, onSuccess }) => async () => {
+        try {
+            await DeleteUser(data)
+            Toast(DELETE_SUCCESS)
+            onSuccess && onSuccess()
+        } catch (e) {
+
+        }
     }
 
 
-    const actFeatcData = (data) => dispatch => {
-        dispatch({
-            type: USUARIO_TYPES.FEATCH,
-            payload: data
-        })
-    }
-
-    const actClearUser = () => dispatch => {
-        dispatch({
-            type: USUARIO_TYPES.CLEAR
-        })
-    }
 
     return {
         actGetUsers,
-        actFeatcData,
-        actClearUser,
         actCreateUser,
         actUpdateUser,
         actDeleteUser

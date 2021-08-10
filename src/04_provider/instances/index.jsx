@@ -17,7 +17,7 @@ export const interceptorHandler = (WrappedComponent) => props => {
     const { Toast, ERROR } = useToast()
     const handleResponseError = (error) => {
         const callToast = (content) => {
-            Toast(content, ERROR)
+            Toast(ERROR, content)
         }
         switch (error.response.status) {
             case 400:

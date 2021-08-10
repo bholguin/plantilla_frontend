@@ -18,11 +18,49 @@ export const useEmpresas = () => {
     } = useActions()
 
     const {
-        actGetEmpresas
+        actGetEmpresas,
+        actDeleteEmpresa
     } = useActEmpresa()
 
+    const [open, setOpen] = useState(false)
+    const [id, setId] = useState(null)
+    const handleOpen = () => setOpen(!open)
     const createEmpresa = () => history.push('/app/config/empresas/create-or-edit', { action: "crear" })
     const editEmpresa = (data) => history.push('/app/config/empresas/create-or-edit', { action: "editar", empresa: data })
+
+    const handleDelete = (id) => {
+        handleOpen()
+        setId(id)
+    }
+
+    const onDelete = () => {
+        dispatch(actDeleteEmpresa({
+            data: id,
+            onSuccess: () => {
+                handleOpen()
+                dispatch(actGetEmpresas())
+            }
+        }))
+    }
+
+    useEffect(() => {
+        dispatch(actGetEmpresas())
+    }, [dispatch])// eslint-disable-line react-hooks/exhaustive-deps
+
+
+    return {
+        open,
+        empresas,
+        onDelete,
+        handleOpen,
+        handleDelete,
+        editEmpresa,
+        createEmpresa
+    }
+
+}
+
+export const useColumnTable = ({ editEmpresa, handleDelete }) => {
 
     const [columns] = useState([{
         id: 'empresas',
@@ -52,7 +90,7 @@ export const useEmpresas = () => {
                         <IconButton onClick={() => editEmpresa(row.original)}>
                             <EditIcon />
                         </IconButton>
-                        <IconButton onClick={() => { }}>
+                        <IconButton onClick={() => handleDelete(row.original.id)}>
                             <DeleteForeverIcon />
                         </IconButton>
                     </span>
@@ -61,16 +99,7 @@ export const useEmpresas = () => {
         ],
     }])
 
-    useEffect(() => {
-        dispatch(actGetEmpresas())
-    }, [dispatch])
-
-
-
     return {
-        columns,
-        empresas,
-        createEmpresa
+        columns
     }
-
 }

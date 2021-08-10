@@ -5,22 +5,31 @@ import Login from '../../06_screens/login';
 import Usuario from '../../06_screens/config/usuarios';
 import Home from '../../06_screens/home';
 import Config from '../../06_screens/config';
-
+import Sig from "../../06_screens/sig"
 import Empresas from "../../06_screens/config/empresas";
 import EmpresaCreateOrEdit from "../../06_screens/config/empresas/CreateOrEdit";
-
+import UsuarioCreateOrEdit from "../../06_screens/config/usuarios/CreateOrEdit"
 
 const AppRoutes = (PrivateRoute) => {
     return (
         <BrowserRouter>
             <Switch>
+                {/* Rutas generales */}
                 <PrivateRoute exact path='/' component={Home} />
                 <PrivateRoute exact path='/app' component={Home} />
                 <PrivateRoute exact path='/app/home' component={Home} />
                 <PrivateRoute exact path='/app/config' component={Config} />
+                <PrivateRoute exact path='/app/sig' component={Sig} />
+
+                {/* Rutas modulo usuarios */}
                 <PrivateRoute exact path='/app/config/usuario' component={Usuario} />
+                <PrivateRoute exact path='/app/config/usuario/create-or-edit' component={UsuarioCreateOrEdit} />
+
+                {/* Rutas modulo empresa */}
                 <PrivateRoute exact path='/app/config/empresas' component={Empresas} />
-                <PrivateRoute exact path='/app/config/empresas/create-or-edit' component={EmpresaCreateOrEdit}  />
+                <PrivateRoute exact path='/app/config/empresas/create-or-edit' component={EmpresaCreateOrEdit} />
+
+                {/* Rutas Login */}
                 <Route path='/app/login' component={Login} />
             </Switch>
         </BrowserRouter>

@@ -10,9 +10,6 @@ import TableRow from '@material-ui/core/TableRow'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { useTable, useGlobalFilter, useAsyncDebounce } from 'react-table'
-import IconButton from '@material-ui/core/IconButton';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles({
     root: {

@@ -10,7 +10,9 @@ export const useEmpresaServices = () => {
 
     const {
         getEmpresas,
-        postEmpresa
+        postEmpresa,
+        putEmpresa,
+        deleteEmpresa
     } = useEmpresaProvider()
 
 
@@ -34,9 +36,31 @@ export const useEmpresaServices = () => {
         })
     }
 
+    const PutEmpresa = (data) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                resolve(await trackPromise(putEmpresa(data)))
+            } catch (e) {
+                reject(e)
+            }
+        })
+    }
+
+    const DeleteEmpresa = (data) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                resolve(await trackPromise(deleteEmpresa(data)))
+            } catch (e) {
+                reject(e)
+            }
+        })
+    }
+
     return {
         GetEmpresas,
-        PostEmpresa
+        PostEmpresa,
+        PutEmpresa,
+        DeleteEmpresa
     }
 
 }

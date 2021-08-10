@@ -3,33 +3,33 @@ import { useLocation, useHistory } from "react-router-dom"
 import { useActions } from "../../../../../01_actions"
 
 export const useCreateOrEdit = ({ reset }) => {
-    
+
     const history = useHistory()
     const { state } = useLocation()
 
-    const { action, empresa } = state
+    const { action, usuario } = state
 
-    
+
     const {
         dispatch,
-        useActEmpresa
+        useActUser
     } = useActions()
 
     const {
-        actPostEmpresa,
-        actPutEmpresa
-    } = useActEmpresa()
+        actCreateUser,
+        actUpdateUser
+    } = useActUser()
 
     const onSuccess = () => history.goBack()
 
     const submit = (data) => {
         switch (action) {
             case 'crear':
-                dispatch(actPostEmpresa({ data, onSuccess }))
+                dispatch(actCreateUser({ data, onSuccess }))
                 break;
             case 'editar':
-                dispatch(actPutEmpresa({
-                    data: { ...data, id: empresa.id },
+                dispatch(actUpdateUser({
+                    data: { ...data, id: usuario.id },
                     onSuccess
                 }))
                 break
@@ -39,15 +39,15 @@ export const useCreateOrEdit = ({ reset }) => {
     }
 
     useEffect(() => {
-        if (empresa) {
+        if (usuario) {
+            console.log(usuario)
             reset({
-                nombre: empresa.nombre,
-                nit: empresa.nit,
-                direccion: empresa.direccion,
-                telefono: empresa.telefono
+                nombre: usuario.nombre,
+                apellido: usuario.apellido,
+                username: usuario.username,
             })
         }
-    }, [reset, empresa])
+    }, [reset, usuario])
 
 
     return {
