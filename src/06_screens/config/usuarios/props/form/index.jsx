@@ -6,16 +6,13 @@ import 'w3-css/w3.css'
 import { useUser } from "../../hook";
 
 const Form = () => {
-    const { register, handleSubmit } = useForm()
     const {
         model,
         createoredit,
         handleFormClose,
         submit
     } = useUser()
-
-
-
+    const { register, handleSubmit, errors } = useForm()
     return (
         <Fragment>
             <Dialog
@@ -29,10 +26,14 @@ const Form = () => {
                 <form onSubmit={handleSubmit(submit)}>
                     <DialogContent>
                         <input ref={register} name='id' defaultValue={model.id} type='hidden' />
-                        <InputForm label='Nombre' ref={register} defaultValue={model.nombre} type='text' name='nombre' placeholder={'ingrese nombre...'} />
-                        <InputForm label='Apellido' ref={register} defaultValue={model.apellido} type='text' name='apellido' placeholder={'ingrese apellido...'} />
-                        <InputForm label='Username' ref={register} defaultValue={model.username} type='text' name='username' placeholder={'ingrese username...'} />
-                        <InputForm label='Password' ref={register} defaultValue={model.public_id} type='password' name='password' placeholder={'ingrese password...'} />
+                        <InputForm label='Nombre' ref={register({required: true})} defaultValue={model.nombre} type='text' name='nombre' placeholder={'ingrese nombre...'} />
+                        <p>{errors.nombre && "El nombre es requerido"}</p> 
+                        <InputForm label='Apellido' ref={register({required: true})} defaultValue={model.apellido} type='text' name='apellido' placeholder={'ingrese apellido...'} />
+                        <p>{errors.apellido && "El username es requerido"}</p> 
+                        <InputForm label='Username' ref={register({required: true})} defaultValue={model.username} type='text' name='username' placeholder={'ingrese username...'} />
+                        <p>{errors.username && "El nombre es requerido"}</p> 
+                        <InputForm label='Password' ref={register({required: true})} defaultValue={model.password} type='password' name='password' placeholder={'ingrese password...'} />
+                        <p>{errors.username && "El nombre es requerido"}</p> 
                     </DialogContent>
                     <DialogActions className='w3-margin-top'>
                         <Button type='submit' className={'w3-indigo'}>{createoredit.buttonProps.tittle}</Button>

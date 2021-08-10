@@ -21,23 +21,23 @@ export const interceptorHandler = (WrappedComponent) => props => {
         }
         switch (error.response.status) {
             case 400:
-                callToast(error.response.data.message)
+                callToast(error.response.data)
                 break
             case 401:
                 localStorage.clear()
                 dispatch(actTokenError())
                 break
             case 403:
-                callToast(error.response.data.message)
+                callToast(error.response.data)
                 break
             case 404:
-                callToast(error.response.data.message)
+                callToast(error.response.data)
                 break
             case 422:
-                callToast(error.response.data.message)
+                callToast(error.response.data)
                 break
             case 500:
-                callToast(error.response.data.message)
+                callToast(error.response.data)
                 break
             default:
                 break

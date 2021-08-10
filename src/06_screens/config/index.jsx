@@ -30,17 +30,9 @@ const Config = () => {
                 </Grid>
                 <Grid item xs={4} className={classes.opciones}>
                     <IconPanel>
-                        <Link to='/app/config/'>
+                        <Link to='/app/config/empresas'>
                             <LocalLibrary />
-                            <Typography>Articulos</Typography>
-                        </Link>
-                    </IconPanel>
-                </Grid>
-                <Grid item xs={4} className={classes.opciones}>
-                    <IconPanel>
-                        <Link to='/app/config/'>
-                            <AirportShuttle />
-                            <Typography >Carros</Typography>
+                            <Typography>Empresas</Typography>
                         </Link>
                     </IconPanel>
                 </Grid>

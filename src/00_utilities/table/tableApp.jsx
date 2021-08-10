@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from "prop-types"
 import TableContainer from '@material-ui/core/TableContainer';
 import Paper from '@material-ui/core/Paper';
 import MaUTable from '@material-ui/core/Table'
@@ -9,9 +10,12 @@ import TableRow from '@material-ui/core/TableRow'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { useTable, useGlobalFilter, useAsyncDebounce } from 'react-table'
+import IconButton from '@material-ui/core/IconButton';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles({
-    root:{
+    root: {
         '& div': {
             width: '50%'
         }
@@ -65,20 +69,6 @@ const StyledTableCell = withStyles((theme) => ({
     },
 }))(TableCell);
 
-const StyledTableCellOptions = withStyles((theme) => ({
-    head: {
-        width: '15%',
-        backgroundColor: '#4d4343',
-        color: theme.palette.common.white,
-        fontSize: 14,
-        padding: 5,
-        fontWeight: 'bold'
-    },
-    body: {
-        padding: 5,
-        fontSize: 13
-    },
-}))(TableCell);
 
 const StyledTableRow = withStyles((theme) => (
     {
@@ -90,20 +80,24 @@ const StyledTableRow = withStyles((theme) => (
             },
         },
     }
-
 ))(TableRow);
 
-const TableApp = ({ columns, data }) => {
-    const { getTableProps,
+const TableApp = (props) => {
+
+    const { columns, data } = props
+
+    const {
+        getTableProps,
         headerGroups,
         rows,
         prepareRow,
         setGlobalFilter,
         preGlobalFilteredRows,
-        state } = useTable({
-            columns,
-            data,
-        }, useGlobalFilter)
+        state
+    } = useTable({
+        columns,
+        data,
+    }, useGlobalFilter)
 
     return (
         <div>
@@ -118,13 +112,9 @@ const TableApp = ({ columns, data }) => {
                         {headerGroups.map(headerGroup => (
                             <StyledTableRow {...headerGroup.getHeaderGroupProps()}>
                                 {headerGroup.headers.map(column => (
-                                    column.id === 'opciones' ?
-                                        <StyledTableCellOptions {...column.getHeaderProps()}>
-                                            {column.Header}
-                                        </StyledTableCellOptions> :
-                                        <StyledTableCell {...column.getHeaderProps()}>
-                                            {column.Header}
-                                        </StyledTableCell>
+                                    <StyledTableCell {...column.getHeaderProps()}>
+                                        {column.Header}
+                                    </StyledTableCell>
                                 ))}
                             </StyledTableRow>
                         ))}
@@ -136,11 +126,16 @@ const TableApp = ({ columns, data }) => {
                                 <StyledTableRow {...row.getRowProps()}>
                                     {row.cells.map(cell => {
                                         return (
-                                            <StyledTableCell {...cell.getCellProps()}>
-                                                {cell.render('Cell')}
-                                            </StyledTableCell>
+                                          
+                                                <StyledTableCell {...cell.getCellProps()}>
+                                                    {cell.render('Cell')}
+                                                </StyledTableCell>
+                                                
                                         )
                                     })}
+                                    <StyledTableCell>
+
+                                    </StyledTableCell>
                                 </StyledTableRow>
                             )
                         })}
@@ -149,6 +144,16 @@ const TableApp = ({ columns, data }) => {
             </TableContainer>
         </div>
     )
+}
+
+TableApp.propTypes = {
+    columns: PropTypes.array,
+    data: PropTypes.array
+}
+
+TableApp.defaultProps = {
+    column: [],
+    data: []
 }
 
 export default TableApp;

@@ -7,7 +7,7 @@ import { useToast } from '../../../00_utilities/Toast/hook'
 export const useActUser = () => {
 
     const { UserService } = useServices()
-    const { Toast, SUCCESS } = useToast();
+    const { Toast, EDIT_SUCCESS, CREATE_SUCCESS, DELETE_SUCCESS } = useToast();
 
     const actGetUsers = () => async (dispatch) => {
         dispatch({
@@ -38,7 +38,7 @@ export const useActUser = () => {
                 if (callback) {
                     callback()
                 }
-                Toast('Se editó con exito...', SUCCESS)
+                Toast(EDIT_SUCCESS)
             }).catch(e => {
                 dispatch({
                     type: USUARIO_TYPES.ERROR,
@@ -61,7 +61,7 @@ export const useActUser = () => {
                 if (callback) {
                     callback()
                 }
-                Toast('Se creó con exito...', SUCCESS)
+                Toast(CREATE_SUCCESS)
             }).catch(e => {
                 dispatch({
                     type: USUARIO_TYPES.ERROR,
@@ -83,7 +83,7 @@ export const useActUser = () => {
                 if (callback) {
                     callback()
                 }
-                Toast('Se eliminó con exito...', SUCCESS)
+                Toast(DELETE_SUCCESS)
             }).catch(e => {
                 dispatch({
                     type: USUARIO_TYPES.ERROR,

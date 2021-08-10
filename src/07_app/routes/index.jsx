@@ -6,6 +6,10 @@ import Usuario from '../../06_screens/config/usuarios';
 import Home from '../../06_screens/home';
 import Config from '../../06_screens/config';
 
+import Empresas from "../../06_screens/config/empresas";
+import EmpresaCreateOrEdit from "../../06_screens/config/empresas/CreateOrEdit";
+
+
 const AppRoutes = (PrivateRoute) => {
     return (
         <BrowserRouter>
@@ -15,6 +19,8 @@ const AppRoutes = (PrivateRoute) => {
                 <PrivateRoute exact path='/app/home' component={Home} />
                 <PrivateRoute exact path='/app/config' component={Config} />
                 <PrivateRoute exact path='/app/config/usuario' component={Usuario} />
+                <PrivateRoute exact path='/app/config/empresas' component={Empresas} />
+                <PrivateRoute exact path='/app/config/empresas/create-or-edit' component={EmpresaCreateOrEdit}  />
                 <Route path='/app/login' component={Login} />
             </Switch>
         </BrowserRouter>

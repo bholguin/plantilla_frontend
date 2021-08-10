@@ -32,7 +32,7 @@ const Home = () => {
                         <IconPanel>
                             <Link to='/'>
                                 <LocalLibrary />
-                                <Typography>Inventario</Typography>
+                                <Typography>SST</Typography>
                             </Link>
                         </IconPanel>
                     </Grid>

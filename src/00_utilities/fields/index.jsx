@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 
 
 export const InputForm = forwardRef((props, ref) => {
-    const { label, type, name, value, placeholder } = props
+    const { label, type, name, value, placeholder, errors } = props
     return (
         <Fragment>
             <div className='w3-margin'>
@@ -41,6 +41,7 @@ export const InputForm = forwardRef((props, ref) => {
                     ref={ref}
                     {...props}
                 />
+                <p>{errors && errors[name] && "Campo requerido"}</p>
             </div>
         </Fragment>
     )
