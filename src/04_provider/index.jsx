@@ -1,10 +1,10 @@
 import { useUsuarioProvider } from "./config/user";
-import * as LoginProvider from "./login";
+import { useLoginProvider } from "./login";
 import { useEmpresaProvider } from "./config/empresa";
 
 const useProvider = () => {
     return {
-        LoginProvider,
+        useLoginProvider,
         useUsuarioProvider,
         useEmpresaProvider
     }

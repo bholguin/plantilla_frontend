@@ -1,17 +1,22 @@
 import { useState } from "react";
-import { useActLogin } from '../../../01_actions/login'
-import { useDispatch } from "react-redux";
+import { useActions } from '../../../01_actions'
 
 export const useHeader = () => {
+
+    const{
+        dispatch,
+        useActLogin
+    } = useActions()
+    
     const { actGetLogout } = useActLogin()
-    const dispatch = useDispatch()
+
     const [open, setOpen] = useState(false);
     const Logout = () => dispatch(actGetLogout())
     const handleDrawer = () => setOpen(!open)
 
     return {
         open,
-        handleDrawer,
-        Logout
+        Logout,
+        handleDrawer
     }
 }

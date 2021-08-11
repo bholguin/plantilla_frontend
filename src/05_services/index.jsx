@@ -1,11 +1,11 @@
 
-import * as LoginService from "./login";
+import { useLoginServices } from "./login";
 import { useUsuarioServices } from "./config/user";
 import { useEmpresaServices } from "./config/empresa";
 
 const useService = () => {
     return {
-        LoginService,
+        useLoginServices,
         useUsuarioServices,
         useEmpresaServices
     }

@@ -1,15 +1,21 @@
-import { useActLogin } from "../../../01_actions/login";
-import { useDispatch, useSelector } from "react-redux";
+import { useActions } from "../../../01_actions";
+import { useSelector } from "react-redux";
 import { authSelector } from "../selectors";
 
 export const useLogin = () => {
     const auth = useSelector(authSelector)
-    const dispatch = useDispatch()
+
+    const {
+        dispatch,
+        useActLogin
+    } = useActions()
+
     const { actPostLogin } = useActLogin()
+
     const Login = (data) => dispatch(actPostLogin(data))
 
     return {
-        Login,
-        auth
+        auth,
+        Login
     }
 }
