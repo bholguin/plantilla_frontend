@@ -11,17 +11,14 @@ export const auth = (state = {
     token: ''
 }, action) => {
     switch (action.type) {
-        case LOGIN_TYPE.USER_LOADING:
-            return { ...state, isLoading: true };
-        case LOGIN_TYPE.USER_LOADED:
+        case LOGIN_TYPE.LOGIN_SUCCESSFUL:
             return {
                 ...state,
+                ...action.payload,
                 isAuthenticated: true,
                 isLoading: false,
-                user: action.user,
+                errors: null
             };
-        case LOGIN_TYPE.LOGIN_SUCCESSFUL:
-            return { ...state, ...action.payload, isAuthenticated: true, isLoading: false, errors: null };
         case LOGIN_TYPE.AUTHENTICATION_ERROR:
             return {
                 ...state,
@@ -33,7 +30,6 @@ export const auth = (state = {
                 mi_cuenta: null,
                 mis_permisos: null
             };
-        case LOGIN_TYPE.LOGIN_FAILED:
         case LOGIN_TYPE.LOGOUT_SUCCESSFUL:
             return {
                 ...state,

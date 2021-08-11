@@ -10,7 +10,7 @@ export const user = (state = {
                 usuarios: action.payload
             }
         default:
-            return state
+            return {...state}
     }
 };
 
