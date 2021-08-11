@@ -8,7 +8,8 @@ export const auth = (state = {
     isLoading: true,
     user: null,
     errors: null,
-    token: ''
+    token: '',
+    microsoftToken: {}
 }, action) => {
     switch (action.type) {
         case LOGIN_TYPE.LOGIN_SUCCESSFUL:
@@ -41,6 +42,11 @@ export const auth = (state = {
                 mi_cuenta: null,
                 mis_permisos: null
             };
+        case LOGIN_TYPE.LOGIN_SUCCESSFUL_MICROSOFT:
+            return {
+                ...state,
+                microsoftToken: action.payload
+            }
         default:
             return state;
     }

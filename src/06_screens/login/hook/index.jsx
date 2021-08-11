@@ -10,9 +10,15 @@ export const useLogin = () => {
         useActLogin
     } = useActions()
 
-    const { actPostLogin } = useActLogin()
+    const {
+        actPostLogin,
+        actGetLoginMicrosoft
+    } = useActLogin()
 
-    const Login = (data) => dispatch(actPostLogin(data))
+    const Login = (data) => dispatch(actPostLogin({
+        data,
+        onSuccess: () => dispatch(actGetLoginMicrosoft())
+    }))
 
     return {
         auth,

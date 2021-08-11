@@ -10,6 +10,6 @@ export const empresa = (state = {
                 empresas: action.payload
             }
         default:
-            return {...state}
+            return state
     }
 }

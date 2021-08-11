@@ -9,7 +9,7 @@ export const useToast = () => {
     const DELETE_SUCCESS = "Se eliminó con exito"
     const ERROR = 'error';
 
-    const Toast = (type) => {
+    const Toast = (type, msg) => {
         const n = new Notyf({
             duration: 3000,
             dismissible: true,
@@ -33,7 +33,7 @@ export const useToast = () => {
                 n.success(DELETE_SUCCESS)
                 break;
             case ERROR:
-                n.error(ERROR);
+                n.error(msg);
                 break;
             default:
                 break;

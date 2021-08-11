@@ -10,6 +10,10 @@ export const axiosFlaskApi = axios.create({
     baseURL: process.env.REACT_APP_FLASK_API
 })
 
+export const axiosGraphApi = axios.create({
+    baseURL: "https://graph.microsoft.com/v1.0/me"
+})
+
 
 export const interceptorHandler = (WrappedComponent) => props => {
     const dispatch = useDispatch()
@@ -34,7 +38,7 @@ export const interceptorHandler = (WrappedComponent) => props => {
                 callToast(error.response.data)
                 break
             case 422:
-                callToast(error.response.data)
+                callToast(error.response.data.msg)
                 break
             case 500:
                 callToast(error.response.data)
@@ -44,14 +48,28 @@ export const interceptorHandler = (WrappedComponent) => props => {
             // not handler error
         }
     }
-    const token = useSelector(tokenSelector)
+    const { apiToken } = useSelector(tokenSelector)
+
     axiosFlaskApi.defaults.headers = {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${apiToken}`
     }
+
+    axiosGraphApi.defaults.headers = {
+        Authorization: `Bearer ${window.localStorage.getItem('microsoftToken')}`
+    }
+
     axiosFlaskApi.interceptors.response.use((response) => {
         return response
     }, async (error) => {
         await handleResponseError(error)
+        throw error
+    })
+
+    axiosGraphApi.interceptors.response.use((response) => {
+        return response
+    }, async (error) => {
+        console.log(error.response)
+        //await handleResponseError(error)
         throw error
     })
 

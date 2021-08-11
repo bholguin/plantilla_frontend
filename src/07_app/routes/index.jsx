@@ -49,9 +49,8 @@ const RootContainer = () => {
             }
         }} />
     };
-    return (
-        AppRoutes(PrivateRoute)
-    )
+
+    return AppRoutes(PrivateRoute)
 }
 
 export default RootContainer

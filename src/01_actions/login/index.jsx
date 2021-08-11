@@ -7,16 +7,18 @@ export const useActLogin = () => {
 
     const {
         GetLogout,
-        PostLogin
+        PostLogin,
+        GetLoginMicrosoft
     } = useLoginServices()
 
-    const actPostLogin = (data) => async (dispatch) => {
+    const actPostLogin = ({ data, onSuccess }) => async (dispatch) => {
         try {
             const res = await PostLogin(data)
             dispatch({
                 type: LOGIN_TYPE.LOGIN_SUCCESSFUL,
                 payload: res.data
             })
+            onSuccess && onSuccess()
         } catch (e) {
             dispatch({
                 type: LOGIN_TYPE.AUTHENTICATION_ERROR,
@@ -36,6 +38,15 @@ export const useActLogin = () => {
         }
     }
 
+    const actGetLoginMicrosoft = () => async (dispatch) => {
+        try {
+            await GetLoginMicrosoft()
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+
     const actTokenError = () => (dispatch) => {
         dispatch({
             type: LOGIN_TYPE.LOGOUT_SUCCESSFUL
@@ -45,6 +56,7 @@ export const useActLogin = () => {
     return {
         actPostLogin,
         actGetLogout,
-        actTokenError
+        actTokenError,
+        actGetLoginMicrosoft
     }
 }

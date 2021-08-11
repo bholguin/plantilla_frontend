@@ -1,7 +1,6 @@
 
 import { axiosFlaskApi } from '../instances'
 
-
 export const useLoginProvider = () => {
 
     const postLogin = (data) => {
@@ -11,7 +10,7 @@ export const useLoginProvider = () => {
             data
         })
     }
-    
+
     const getLogout = () => {
         return axiosFlaskApi({
             method: 'GET',
@@ -19,11 +18,10 @@ export const useLoginProvider = () => {
         })
     }
 
-    return{
+    return {
         postLogin,
-        getLogout
+        getLogout,
     }
-
 
 }
 
