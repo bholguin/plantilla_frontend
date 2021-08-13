@@ -37,6 +37,7 @@ export const useLoginServices = () => {
     }
 
     const GetLoginMicrosoft = () => {
+        console.log(loginRequest)
         return new Promise(async (resolve, reject) => {
             try {
                 resolve(await trackPromise(instance.loginRedirect(loginRequest)))

@@ -8,7 +8,9 @@ export const useSigServices = () => {
     } = useProvider()
 
     const {
-        getDrive
+        getDrive,
+        getDriveIntro,
+        CreateFolder
     } = useSigProvider()
 
     const GetDrive = () => {
@@ -21,7 +23,29 @@ export const useSigServices = () => {
         })
     }
 
-    return{
-        GetDrive
+    const GetDriveIntro = ({ id }) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                resolve(await trackPromise(getDriveIntro({ id })))
+            } catch (e) {
+                reject(e)
+            }
+        })
+    }
+
+    const PostCreateFolder = ({ id, data }) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                resolve(await trackPromise(CreateFolder({ id, data })))
+            } catch (e) {
+                reject(e)
+            }
+        })
+    }
+
+    return {
+        GetDrive,
+        GetDriveIntro,
+        PostCreateFolder
     }
 }

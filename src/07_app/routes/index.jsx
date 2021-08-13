@@ -9,6 +9,7 @@ import Sig from "../../06_screens/sig"
 import Empresas from "../../06_screens/config/empresas";
 import EmpresaCreateOrEdit from "../../06_screens/config/empresas/CreateOrEdit";
 import UsuarioCreateOrEdit from "../../06_screens/config/usuarios/CreateOrEdit"
+import EmpresaDocuemnts from "../../06_screens/sig/Documents"
 
 const AppRoutes = (PrivateRoute) => {
     return (
@@ -19,7 +20,10 @@ const AppRoutes = (PrivateRoute) => {
                 <PrivateRoute exact path='/app' component={Home} />
                 <PrivateRoute exact path='/app/home' component={Home} />
                 <PrivateRoute exact path='/app/config' component={Config} />
+
+                {/* Rutas modulo sig */}
                 <PrivateRoute exact path='/app/sig' component={Sig} />
+                <PrivateRoute exact path='/app/sig/documents' component={EmpresaDocuemnts} />
 
                 {/* Rutas modulo usuarios */}
                 <PrivateRoute exact path='/app/config/usuario' component={Usuario} />
