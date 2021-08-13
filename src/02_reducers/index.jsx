@@ -1,12 +1,14 @@
-import { combineReducers } from "@reduxjs/toolkit"
+import {combineReducers} from "@reduxjs/toolkit"
 //new
-import { user } from '../02_reducers/config/usuario'
-import { empresa } from "../02_reducers/config/empresa";
-import { auth } from '../02_reducers/login'
+import {user} from './config/usuario'
+import {empresa} from "./config/empresa";
+import {auth} from './login'
+import {sig} from "./sig"
 
 export default combineReducers({
     auth,
     empresa,
-    user
+    user,
+    sig
 });
 

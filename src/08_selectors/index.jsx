@@ -1,13 +1,15 @@
-import { authSelector } from "./auth";
-import { empresasSelector } from "./config/empresa";
-import { userSelector } from "./config/usuario"
-import { useSelector } from "react-redux";
+import {authSelector} from "./auth";
+import {sigSelector} from "./sig"
+import {empresasSelector} from "./config/empresa";
+import {userSelector} from "./config/usuario"
+import {useSelector} from "react-redux";
 
 export const useSelectors = () => {
-    return{
+    return {
         useSelector,
         authSelector,
         userSelector,
+        sigSelector,
         empresasSelector
     }
 }

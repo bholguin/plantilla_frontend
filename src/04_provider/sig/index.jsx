@@ -2,32 +2,41 @@ import { axiosGraphApi } from "../instances"
 
 export const useSigProvider = () => {
 
-    const getDrive = () => {
+    const getDrive = ({id}) => {
         return axiosGraphApi({
             method: 'GET',
-            url: '/drive/root/children'
+            url: `/drive/items/${id}/`
         })
     }
 
-    const getDriveIntro = ({id}) => {
+    const getDriveIntro = ({ id }) => {
         return axiosGraphApi({
             method: 'GET',
             url: `/drive/items/${id}/children`
         })
     }
 
-    const CreateFolder = ({id, data}) => {
+    const getRootFolder = () => {
         return axiosGraphApi({
-            method: 'post',
+            method: 'GET',
+            url: `/drive/root:/${process.env.REACT_ROOT_FOLDER}:/children`
+        })
+    }
+
+    const CreateFolder = ({ id, data }) => {
+        ///me/drive/root/children
+        return axiosGraphApi({
+            method: 'POST',
             url: `/drive/items/${id}/children`,
             data
         })
     }
 
-    return{
+    return {
         getDrive,
         getDriveIntro,
-        CreateFolder
+        CreateFolder,
+        getRootFolder
     }
 
 }

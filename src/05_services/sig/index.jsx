@@ -13,10 +13,10 @@ export const useSigServices = () => {
         CreateFolder
     } = useSigProvider()
 
-    const GetDrive = () => {
+    const GetDrive = ({id}) => {
         return new Promise(async (resolve, reject) => {
             try {
-                resolve(await trackPromise(getDrive()))
+                resolve(await trackPromise(getDrive({id})))
             } catch (e) {
                 reject(e)
             }

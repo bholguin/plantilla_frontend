@@ -1,8 +1,10 @@
 import useService from "../../05_services";
 
+import {SIG_TYPE} from "../types"
+
 export const useActSig = () => {
 
-    const { useSigServices } = useService()
+    const {useSigServices} = useService()
 
     const {
         GetDrive,
@@ -11,37 +13,61 @@ export const useActSig = () => {
     } = useSigServices()
 
 
-    const actGetDrive = ({ setItems }) => async (dispatch) => {
+    const actGetDrive = ({id, onSuccess}) => async (dispatch) => {
         try {
-            const res = await GetDrive()
-            setItems(res.data.value)
+            const res = await GetDrive({id})
+            onSuccess && onSuccess({data: res.data})
         } catch (e) {
 
         }
     }
 
-    const actGetDriveIntro = ({ id, setItems }) => async (dispatch) => {
+    const actGetDriveIntro = ({id, setItems, onSuccess}) => async (dispatch) => {
         try {
-            const res = await GetDriveIntro({ id })
+            const res = await GetDriveIntro({id})
             setItems(res.data.value)
+            onSuccess && onSuccess({data: res.data})
         } catch (e) {
 
         }
     }
 
-    const actPostCreateFolder = ({ id, data }) => async (dispatch) => {
+    const actPostCreateFolder = ({id, data}) => async (dispatch) => {
         try {
-            const res = await PostCreateFolder({ id, data })
+            const res = await PostCreateFolder({id, data})
             console.log(res)
         } catch (e) {
 
         }
     }
 
+    const actAddBreadcrumb = ({breadcrumb}) => (dispatch) => {
+        dispatch({
+            type: SIG_TYPE.ADD_BREADCRUMB,
+            payload: breadcrumb
+        })
+    }
+
+    const actSetBreadcrumb = ({breadcrumb}) => (dispatch) => {
+        dispatch({
+            type: SIG_TYPE.SET_BREADCRUMB,
+            payload: breadcrumb
+        })
+    }
+
+    const actClearBreadcrumb = () => (dispatch) => {
+        dispatch({
+            type: SIG_TYPE.CLEAR_BREADCRUMB,
+        })
+    }
+
     return {
         actGetDrive,
         actGetDriveIntro,
-        actPostCreateFolder
+        actPostCreateFolder,
+        actAddBreadcrumb,
+        actClearBreadcrumb,
+        actSetBreadcrumb
     }
 
 }

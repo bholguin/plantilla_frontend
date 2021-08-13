@@ -3,12 +3,12 @@
  * Licensed under the MIT License.
  */
 
-import { LogLevel } from "@azure/msal-browser";
+import {LogLevel} from "@azure/msal-browser";
 
 /**
- * Configuration object to be passed to MSAL instance on creation. 
+ * Configuration object to be passed to MSAL instance on creation.
  * For a full list of MSAL.js configuration parameters, visit:
- * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md 
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md
  */
 export const msalConfig = {
     auth: {
@@ -51,7 +51,7 @@ export const msalConfig = {
 /**
  * Scopes you add here will be prompted for user consent during sign-in.
  * By default, MSAL.js will add OIDC scopes (openid, profile, email) to any login request.
- * For more information about OIDC scopes, visit: 
+ * For more information about OIDC scopes, visit:
  * https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
 export const loginRequest = {
@@ -59,7 +59,9 @@ export const loginRequest = {
         "User.Read",
         'Files.Read',
         'Files.Read.All',
-        'Files.Read.Selected'
+        'Files.Read.Selected',
+        'Files.ReadWrite',
+        'Files.ReadWrite.All'
     ]
 };
 
