@@ -1,19 +1,19 @@
-import {useEffect, useState} from "react"
-import {useActions} from "../../../../01_actions"
-import {useSelectors} from "../../../../08_selectors"
+import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
+import { useActions } from "../../../../01_actions"
+import { useSelectors } from "../../../../08_selectors"
 
 export const useEmpresaDocuemnts = () => {
 
-    const {useSelector, sigSelector} = useSelectors()
-
+    const [items, setItems] = useState([])
+    const [breadcbm, setBreadcmb] = useState([])
+    const { useSelector, sigSelector } = useSelectors()
+    const { breadcrumb } = useSelector(sigSelector)
+    const {state} = useLocation()
     const {
         dispatch,
         useActSig
     } = useActions()
-
-    const [items, setItems] = useState([])
-    const [actual] = useState("EB26AF30A2946CBE!101")
-    const [breadcbm, setBreadcmb] = useState([])
 
     const {
         actGetDrive,
@@ -21,17 +21,13 @@ export const useEmpresaDocuemnts = () => {
         actClearBreadcrumb,
         actAddBreadcrumb,
         actSetBreadcrumb,
-        actPostCreateFolder
     } = useActSig()
 
-    const {breadcrumb} = useSelector(sigSelector)
-
-
-    const onSuccess = ({data}) => {
+    const onSuccess = ({ data }) => {
         if (!breadcrumb.some((item) => item.id === data.id)) {
-            dispatch(actAddBreadcrumb({breadcrumb: data}))
+            dispatch(actAddBreadcrumb({ breadcrumb: data }))
         }
-        dispatch(actGetDriveIntro({id: data.id, setItems}))
+        dispatch(actGetDriveIntro({ id: data.id, setItems }))
     }
 
     const onClick = (item) => {
@@ -39,29 +35,19 @@ export const useEmpresaDocuemnts = () => {
         if (file[1]) {
             window.open(item.webUrl, '_blank');
         } else {
-            dispatch(actGetDrive({id: item.id, onSuccess}))
+            dispatch(actGetDrive({ id: item.id, onSuccess }))
         }
     }
 
     const onBreadcrumbClick = (e, item) => {
         dispatch(actGetDrive({
-            id: item.id, onSuccess: ({data}) => {
+            id: item.id, onSuccess: ({ data }) => {
                 dispatch(actSetBreadcrumb({
                     breadcrumb: [...breadcrumb.filter((i, index) => {
-                        if (index <= item.index) return {...i}
+                        if (index <= item.index) return { ...i }
                     })]
                 }))
-                dispatch(actGetDriveIntro({id: data.id, setItems}))
-            }
-        }))
-    }
-
-    const createFolder = () => {
-        dispatch(actPostCreateFolder({
-            id: actual, data: {
-                "name": "New Folder graph",
-                "folder": {},
-                "@microsoft.graph.conflictBehavior": "rename"
+                dispatch(actGetDriveIntro({ id: data.id, setItems }))
             }
         }))
     }
@@ -80,14 +66,15 @@ export const useEmpresaDocuemnts = () => {
     }, [breadcrumb])// eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        dispatch(actGetDrive({id: actual, onSuccess}))
+        console.log(state)
+        const {empresa} = state
+        dispatch(actGetDrive({ id: empresa.folder_id, onSuccess }))
         return () => dispatch(actClearBreadcrumb())
-    }, [dispatch])// eslint-disable-line react-hooks/exhaustive-deps
+    }, [dispatch, state])// eslint-disable-line react-hooks/exhaustive-deps
 
     return {
         items,
         breadcbm,
         onClick,
-        createFolder
     }
 }

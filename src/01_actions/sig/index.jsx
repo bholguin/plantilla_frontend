@@ -32,10 +32,17 @@ export const useActSig = () => {
         }
     }
 
-    const actPostCreateFolder = ({id, data}) => async (dispatch) => {
+    const actPostCreateFolder = ({data}) => async (dispatch) => {
         try {
-            const res = await PostCreateFolder({id, data})
-            console.log(res)
+            const {nombre} = data
+            const folder = {
+                "name": nombre,
+                "folder": {},
+                "@microsoft.graph.conflictBehavior": "rename"
+            }
+        
+            const res = await PostCreateFolder({folder})
+            return res
         } catch (e) {
 
         }

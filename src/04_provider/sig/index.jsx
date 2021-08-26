@@ -23,12 +23,12 @@ export const useSigProvider = () => {
         })
     }
 
-    const CreateFolder = ({ id, data }) => {
+    const CreateFolder = ({ folder }) => {
         ///me/drive/root/children
         return axiosGraphApi({
             method: 'POST',
-            url: `/drive/items/${id}/children`,
-            data
+            url: `/drive/items/${process.env.REACT_APP_ROOT_FOLDER_ID}/children`,
+            data: folder
         })
     }
 

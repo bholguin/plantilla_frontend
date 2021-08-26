@@ -33,10 +33,10 @@ export const useSigServices = () => {
         })
     }
 
-    const PostCreateFolder = ({ id, data }) => {
+    const PostCreateFolder = ({ folder }) => {
         return new Promise(async (resolve, reject) => {
             try {
-                resolve(await trackPromise(CreateFolder({ id, data })))
+                resolve(await trackPromise(CreateFolder({folder })))
             } catch (e) {
                 reject(e)
             }

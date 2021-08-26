@@ -11,8 +11,7 @@ const EmpresaDocuemnts = () => {
     const {
         items,
         breadcbm,
-        onClick,
-        createFolder
+        onClick
     } = useEmpresaDocuemnts()
 
     const getIconFile = (name) => {
@@ -145,7 +144,7 @@ const EmpresaDocuemnts = () => {
     return (
         <Workspace>
             Detalle de la empresa
-            <button onClick={createFolder}>create folder</button>
+
             <Breadcrumb
                 items={breadcbm}
                 maxDisplayedItems={10}

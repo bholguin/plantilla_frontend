@@ -4,7 +4,9 @@ import { EMPRESA_TYPE } from "../../types";
 
 export const useActEmpresa = () => {
 
-    const { useEmpresaServices } = useServices()
+    const { useEmpresaServices, useSigServices } = useServices()
+
+    const {PostCreateFolder} = useSigServices()
 
     const {
         Toast,
@@ -34,9 +36,16 @@ export const useActEmpresa = () => {
 
     const actPostEmpresa = ({ data, onSuccess }) => async () => {
         try {
-            await PostEmpresa(data)
+            const {nombre} = data
+            const folder = {
+                "name": nombre,
+                "folder": {},
+                "@microsoft.graph.conflictBehavior": "rename"
+            }
+            const res = await PostCreateFolder({folder})
+            await PostEmpresa({...data, folder_id: res.data.id})
             Toast(CREATE_SUCCESS)
-            onSuccess && onSuccess()
+            onSuccess && onSuccess(data)
         } catch (e) {
 
         }

@@ -20,7 +20,13 @@ export const useCreateOrEdit = ({ reset }) => {
         actPutEmpresa
     } = useActEmpresa()
 
-    const onSuccess = () => history.goBack()
+    //const {actPostCreateFolder} = useActSig()
+
+    const onSuccess = (data) => {
+        //console.log(data)
+        history.goBack()
+        //dispatch(actPostCreateFolder({data}))
+    }
 
     const submit = (data) => {
         switch (action) {
