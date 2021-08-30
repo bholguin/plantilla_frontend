@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { useActions } from "../../../../01_actions"
 import { useSelectors } from "../../../../08_selectors"
-
+import { initializeIcons  } from '@fluentui/font-icons-mdl2';
+import { initializeFileTypeIcons } from "@fluentui/react-file-type-icons";
 export const useEmpresaDocuemnts = () => {
 
     const [items, setItems] = useState([])
@@ -66,7 +67,10 @@ export const useEmpresaDocuemnts = () => {
     }, [breadcrumb])// eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        console.log(state)
+        initializeIcons(undefined, {
+            disableWarnings: true
+          })
+        initializeFileTypeIcons()
         const {empresa} = state
         dispatch(actGetDrive({ id: empresa.folder_id, onSuccess }))
         return () => dispatch(actClearBreadcrumb())

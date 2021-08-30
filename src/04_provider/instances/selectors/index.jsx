@@ -5,6 +5,7 @@ export const tokenSelector = createSelector(
     (auth) => {
        return{
            apiToken: auth.token,
+           microsoftToken: auth.microsoftToken.access_token
        } 
     }
 );

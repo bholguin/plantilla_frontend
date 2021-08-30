@@ -7,7 +7,7 @@ import DonutSmall from '@material-ui/icons/DonutSmall';
 import SettingsApplications from '@material-ui/icons/SettingsApplications';
 import Workspace from '../../workspace';
 import IconPanel from '../../00_utilities/icon_wrapper'
-
+import {useHome} from "./hook"
 const useStyles = makeStyles({
     opciones: {
         textAlign: 'center',
@@ -16,6 +16,7 @@ const useStyles = makeStyles({
 
 const Home = () => {
     const classes = useStyles();
+    useHome()
     return (
         <Workspace>
             <Fragment>

@@ -11,9 +11,12 @@ export const axiosFlaskApi = axios.create({
 })
 
 export const axiosGraphApi = axios.create({
-    baseURL: "https://graph.microsoft.com/v1.0/me"
+    baseURL: process.env.REACT_APP_GRAPH_API
 })
 
+export const axiosMicrosoftLogin = axios.create({
+    baseURL: process.env.REACT_APP_MICROSOFT_LOGIN_API
+})
 
 export const interceptorHandler = (WrappedComponent) => props => {
     const dispatch = useDispatch()
@@ -48,14 +51,14 @@ export const interceptorHandler = (WrappedComponent) => props => {
             // not handler error
         }
     }
-    const { apiToken } = useSelector(tokenSelector)
+    const { apiToken, microsoftToken } = useSelector(tokenSelector)
 
     axiosFlaskApi.defaults.headers = {
         Authorization: `Bearer ${apiToken}`
     }
 
     axiosGraphApi.defaults.headers = {
-        Authorization: `Bearer ${window.localStorage.getItem('microsoftToken')}`
+        Authorization: `Bearer ${microsoftToken}`
     }
 
     axiosFlaskApi.interceptors.response.use((response) => {

@@ -7,7 +7,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import ImgQueso from '../../00_utilities/img/queso.jpg';
+//import ImgQueso from '../../00_utilities/img/queso.jpg';
 import ImgSig from '../../00_utilities/img/sig.fw_.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { FormInputLogin } from '../../00_utilities/fields';

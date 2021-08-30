@@ -1,11 +1,13 @@
 import React from "react"
 import Workspace from "../../../workspace"
-import {DetailsList} from '@fluentui/react/lib/DetailsList';
-import {Breadcrumb} from '@fluentui/react/lib/Breadcrumb';
-import {mergeStyleSets} from '@fluentui/react/lib/Styling';
-import {TooltipHost} from '@fluentui/react';
-import {useEmpresaDocuemnts} from "./hook"
-
+import { DetailsList } from '@fluentui/react/lib/DetailsList';
+import { Breadcrumb } from '@fluentui/react/lib/Breadcrumb';
+import { CommandBar } from '@fluentui/react/lib/CommandBar';
+import { mergeStyleSets } from '@fluentui/react/lib/Styling';
+import { TooltipHost } from '@fluentui/react';
+import { useEmpresaDocuemnts } from "./hook"
+import { Icon } from '@fluentui/react/lib/Icon';
+import { getFileTypeIconProps, FileIconType } from "@fluentui/react-file-type-icons"
 const EmpresaDocuemnts = () => {
 
     const {
@@ -18,12 +20,12 @@ const EmpresaDocuemnts = () => {
         const s = name.split('.')
         if (s[1]) {
             return {
-                icon: `https://static2.sharepointonline.com/files/fabric/assets/item-types/16/${s[1]}.svg`,
+                icon: { ...getFileTypeIconProps({ extension: s[1], size: 16, imageFileType: 'svg' }) },
                 alt: s[1]
             }
         } else {
             return {
-                icon: `https://static2.sharepointonline.com/files/fabric/assets/item-types/16/folder.svg`,
+                icon: { ...getFileTypeIconProps({ type: FileIconType.folder, size: 16, imageFileType: 'svg' }) },
                 alt: "folder"
             }
         }
@@ -80,9 +82,9 @@ const EmpresaDocuemnts = () => {
             maxWidth: 16,
             //onColumnClick: this._onColumnClick,
             onRender: (item) => {
-                const {icon, alt} = getIconFile(item.name)
+                const { icon, alt } = getIconFile(item.name)
                 return <TooltipHost content={`${alt} file`}>
-                    <img src={icon} className={classNames.fileIconImg} alt={`${alt} file icon`}/>
+                    <Icon {...icon} />
                 </TooltipHost>
             }
         },
@@ -132,18 +134,70 @@ const EmpresaDocuemnts = () => {
         },
     ];
 
+
+    const itemsCommand = [
+        {
+            key: 'newItem',
+            text: 'New',
+            cacheKey: 'myCacheKey', // changing this key will invalidate this item's cache
+            iconProps: { iconName: 'Add' },
+            subMenuProps: {
+                items: [
+                    {
+                        key: 'newFolder',
+                        text: 'Folder',
+                        iconProps: { ...getFileTypeIconProps({ type: FileIconType.folder, size: 32, imageFileType: 'svg' }) }
+                    }, {
+                        key: 'WordDocument',
+                        text: 'Word document',
+                        iconProps: { ...getFileTypeIconProps({ extension: 'docx', size: 32, imageFileType: 'svg' }) }
+                    }, {
+                        key: 'ExcelWorkbook',
+                        text: 'Excel workbook',
+                        iconProps: { ...getFileTypeIconProps({ extension: 'xlsx', size: 32, imageFileType: 'svg' }) }
+                    }, {
+                        key: 'PowerPointPresent',
+                        text: 'PowerPoint presentation',
+                        iconProps: { ...getFileTypeIconProps({ extension: 'pptx', size: 32, imageFileType: 'svg' }) }
+                    },
+                ],
+            },
+        },
+        {
+            key: 'upload',
+            text: 'Upload',
+            iconProps: { iconName: 'Upload' },
+        },
+        {
+            key: 'download',
+            text: 'Download',
+            iconProps: { iconName: 'Download' },
+            onClick: (e, item) => console.log('Download', e.target, item),
+        },
+    ];
+
+
+    const _overflowItems = [
+        { key: 'move', text: 'Move to...', onClick: () => console.log('Move to'), iconProps: { iconName: 'MoveToFolder' } },
+        { key: 'copy', text: 'Copy to...', onClick: () => console.log('Copy to'), iconProps: { iconName: 'Copy' } },
+        { key: 'rename', text: 'Rename...', onClick: () => console.log('Rename'), iconProps: { iconName: 'Edit' } },
+    ];
+
+    const overflowProps = { ariaLabel: 'More commands' };
+
+
     function _getCustomDivider(dividerProps) {
         const tooltipText = dividerProps.item ? dividerProps.item.text : '';
         return (
-            <TooltipHost content={`Show ${tooltipText} contents`} calloutProps={{gapSpace: 0}}>
-                <span aria-hidden="true" style={{cursor: 'pointer', padding: 5}}>></span>
+            <TooltipHost content={`Show ${tooltipText} contents`} calloutProps={{ gapSpace: 0 }}>
+                <span aria-hidden="true" style={{ cursor: 'pointer', padding: 5 }}>{'>'}</span>
             </TooltipHost>
         );
     }
 
+
     return (
         <Workspace>
-            Detalle de la empresa
 
             <Breadcrumb
                 items={breadcbm}
@@ -153,7 +207,16 @@ const EmpresaDocuemnts = () => {
                 dividerAs={_getCustomDivider}
             />
 
-            <DetailsList items={items} columns={columns} onItemInvoked={onClick}/>
+            <CommandBar
+                items={itemsCommand}
+                overflowItems={_overflowItems}
+                overflowButtonProps={overflowProps}
+                ariaLabel="Inbox actions"
+                primaryGroupAriaLabel="Email actions"
+                farItemsGroupAriaLabel="More actions"
+            />
+
+            <DetailsList items={items} columns={columns} onItemInvoked={onClick} />
 
         </Workspace>
     )

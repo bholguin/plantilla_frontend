@@ -1,11 +1,8 @@
 import useProvider from "../../04_provider";
 import { trackPromise } from 'react-promise-tracker'
-import { useMsal } from "@azure/msal-react";
 import { loginRequest } from "../../authConfig";
 
 export const useLoginServices = () => {
-
-    const { instance } = useMsal();
 
     const {
         useLoginProvider
@@ -14,6 +11,8 @@ export const useLoginServices = () => {
     const {
         getLogout,
         postLogin,
+        microsoftLogin,
+        microsoftGetToken
     } = useLoginProvider()
 
     const PostLogin = (data) => {
@@ -40,18 +39,29 @@ export const useLoginServices = () => {
         console.log(loginRequest)
         return new Promise(async (resolve, reject) => {
             try {
-                resolve(await trackPromise(instance.loginRedirect(loginRequest)))
+                resolve(await trackPromise(microsoftLogin()))
             } catch (e) {
                 reject(e)
             }
         })
     }
 
+    const GetTokenMicrosoft = ({code}) => {
+        console.log(loginRequest)
+        return new Promise(async (resolve, reject) => {
+            try {
+                resolve(await trackPromise(microsoftGetToken({code})))
+            } catch (e) {
+                reject(e)
+            }
+        })
+    }
 
     return {
         PostLogin,
         GetLogout,
-        GetLoginMicrosoft
+        GetLoginMicrosoft,
+        GetTokenMicrosoft
     }
 
 }

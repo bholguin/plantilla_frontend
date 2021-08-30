@@ -8,7 +8,8 @@ export const useActLogin = () => {
     const {
         GetLogout,
         PostLogin,
-        GetLoginMicrosoft
+        GetLoginMicrosoft,
+        GetTokenMicrosoft
     } = useLoginServices()
 
     const actPostLogin = ({ data, onSuccess }) => async (dispatch) => {
@@ -40,9 +41,23 @@ export const useActLogin = () => {
 
     const actGetLoginMicrosoft = () => async (dispatch) => {
         try {
-            await GetLoginMicrosoft()
+            const res = await GetLoginMicrosoft()
+            window.location.href = res.request.responseURL
         } catch (e) {
             console.log(e);
+        }
+    }
+
+    const actGetTokenMicrosoft = ({code}) => async (dispatch) => {
+        try {
+            const res = await GetTokenMicrosoft({code})
+            dispatch({
+                type: LOGIN_TYPE.LOGIN_SUCCESSFUL_MICROSOFT,
+                payload: res.data
+            })
+            window.history.pushState({}, document.title, "/" + "app");
+        } catch (e) {
+            console.log(e.response);
         }
     }
 
@@ -57,6 +72,7 @@ export const useActLogin = () => {
         actPostLogin,
         actGetLogout,
         actTokenError,
-        actGetLoginMicrosoft
+        actGetLoginMicrosoft,
+        actGetTokenMicrosoft
     }
 }
